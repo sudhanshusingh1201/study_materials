@@ -13,7 +13,7 @@ type: course-topic
 
 # 🔌 Day 04: Introduction to the CLI
 
-Welcome to the notes for **Day 4: Intro to the CLI** of Jeremy's IT Lab CCNA Course! Ye note aapko Cisco IOS Command-Line Interface (CLI) ke basics, console connectivity, CLI modes navigation, configuration management, aur shortcuts ko detailed visual illustrations aur real-world examples ke sath pure Hinglish language mein samjhayega.
+Welcome to the notes for **Day 4: Intro to the CLI** ! Ye note aapko Cisco IOS Command-Line Interface (CLI) ke basics, console connectivity, CLI modes navigation, configuration management, aur shortcuts ko detailed visual illustrations aur real-world examples ke sath pure Hinglish language mein samjhayega.
 
 ---
 
