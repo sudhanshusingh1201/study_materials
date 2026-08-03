@@ -1,0 +1,89 @@
+---
+title: Course on CCNA
+tags:
+  - ccna
+  - networking
+  - study-material
+  - cisco
+  - jeremys-it-lab
+created: 2026-08-03
+type: course-hub
+---
+
+# 🎓 Course on CCNA (Jeremy's IT Lab Day-by-Day)
+
+Welcome to the CCNA Study Vault! Ye notebook **Jeremy's IT Lab CCNA 200-301 Complete Course** ke Day-by-Day schedule ko track karne ke liye hai. Yahan aapke saare learning sessions ke notes, CLI configurations, Cisco Packet Tracer labs, aur visual diagrams safe रहेंगे.
+
+---
+
+## 🗺️ Course Visual Roadmap
+
+Cisco CCNA certification path ke key modules ka flow niche diya gaya hai:
+
+```mermaid
+flowchart TD
+    classDef fundamentals fill:#2196f3,stroke:#0d47a1,stroke-width:2px,color:#fff;
+    classDef switching fill:#4caf50,stroke:#1b5e20,stroke-width:2px,color:#fff;
+    classDef routing fill:#ff9800,stroke:#e65100,stroke-width:2px,color:#fff;
+    classDef services fill:#00bcd4,stroke:#006064,stroke-width:2px,color:#fff;
+    classDef security fill:#f44336,stroke:#b71c1c,stroke-width:2px,color:#fff;
+    classDef automation fill:#607d8b,stroke:#263238,stroke-width:2px,color:#fff;
+
+    Main["🎓 CCNA Day-by-Day Roadmap"] --> Mod1["🌐 Network Fundamentals (Day 1-15)"]
+    Main --> Mod2["🔌 Switching & VLANs (Day 16-21)"]
+    Main --> Mod3["🛣️ Routing & OSPF (Day 22-30)"]
+    Main --> Mod4["🛠️ IP Services (Day 31-38)"]
+    Main --> Mod5["🔒 Security (Day 39-48)"]
+    Main --> Mod6["🤖 Automation & Programmability (Day 49-60)"]
+
+    %% Group 1: Fundamentals
+    Mod1 --> D1["Day 1: Network Devices"]:::fundamentals
+    Mod1 --> D2["Day 2: Interfaces & Cables"]:::fundamentals
+    Mod1 --> D3["Day 3: OSI & TCP/IP Models"]:::fundamentals
+    Mod1 --> D4["Day 4: Intro to CLI"]:::fundamentals
+    Mod1 --> D5["Day 5-6: LAN Switching"]:::fundamentals
+    Mod1 --> D7["Day 7-11: IPv4 & Subnetting"]:::fundamentals
+    Mod1 --> D13["Day 13-15: IPv6 Addressing"]:::fundamentals
+```
+
+---
+
+## 📚 Day-by-Day Table of Contents (TOC)
+
+Niche aapki progress tracker index hai. Jis day ka note ban jayega, wo solid link ho jayega:
+
+### 🌐 Module 1: Network Fundamentals (Days 1 - 15)
+- **Day 01:** 🔌 [[CCNA Course/Day 01 - Network Devices|Network Devices (Hub, Switch, Router, Firewall, WLC)]]
+- **Day 02:** 🔌 [[CCNA Course/Day 02 - Interfaces and Cables|Interfaces and Cables]]
+- **Day 03:** 🔌 [[CCNA Course/Day 03 - OSI Model and TCP-IP Suite|OSI Model and TCP-IP Suite]]
+- **Day 04:** 🔌 [[CCNA Course/Day 04 - Introduction to the CLI|Introduction to the Cisco CLI]]
+- **Day 05:** 🔌 [[CCNA Course/Day 05 - Ethernet LAN Switching - Part 1|Ethernet LAN Switching - Part 1]]
+- **Day 06:** 🔌 [[CCNA Course/Day 06 - Ethernet LAN Switching - Part 2|Ethernet LAN Switching - Part 2]]
+- **Day 07:** 🔌 [[CCNA Course/Day 07 - IPv4 Addresses|IPv4 Addresses]]
+- **Day 08:** 🔌 [[CCNA Course/Day 08 - Subnetting - Part 1|Subnetting - Part 1]]
+- **Day 09:** 🔌 [[CCNA Course/Day 09 - Subnetting - Part 2|Subnetting - Part 2]]
+- **Day 10:** 🔌 [[CCNA Course/Day 10 - Subnetting - Part 3|Subnetting - Part 3]]
+- **Day 11:** 🔌 [[CCNA Course/Day 11 - VLSM|VLSM (Variable Length Subnet Masking)]]
+- **Day 12:** 🔌 [[CCNA Course/Day 12 - Workgroup and Workstation Security|Workgroup and Workstation Security]]
+- **Day 13:** 🔌 [[CCNA Course/Day 13 - IPv6 Addresses - Part 1|IPv6 Addresses - Part 1]]
+- **Day 14:** 🔌 [[CCNA Course/Day 14 - IPv6 Addresses - Part 2|IPv6 Addresses - Part 2]]
+- **Day 15:** 🔌 [[CCNA Course/Day 15 - IPv6 Routing|IPv6 Routing (Static & Default)]]
+
+### 🔌 Module 2: LAN Switching & VLANs (Days 16 - 21)
+- **Day 16:** 🔌 [[CCNA Course/Day 16 - Configuring VLANs|Configuring VLANs]]
+- **Day 17:** 🔌 [[CCNA Course/Day 17 - Trunking and 802.1Q|Trunking and 802.1Q]]
+- **Day 18:** 🔌 [[CCNA Course/Day 18 - Spanning Tree Protocol - Part 1|Spanning Tree Protocol - Part 1]]
+- **Day 19:** 🔌 [[CCNA Course/Day 19 - Spanning Tree Protocol - Part 2|Spanning Tree Protocol - Part 2]]
+- **Day 20:** 🔌 [[CCNA Course/Day 20 - Spanning Tree Protocol - Part 3|Spanning Tree Protocol - Part 3]]
+- **Day 21:** 🔌 [[CCNA Course/Day 21 - EtherChannel|EtherChannel (LACP & PAgP)]]
+
+### 🛣️ Module 3: Routing & OSPF (Days 22 - 30)
+- **Day 22:** 🔌 [[CCNA Course/Day 22 - Dynamic Routing Concepts|Dynamic Routing Concepts]]
+- **Day 23:** 🔌 [[CCNA Course/Day 23 - Static Routing & Floating Static|Static Routing & Floating Static Routes]]
+- **Day 24:** 🔌 [[CCNA Course/Day 24 - OSPF - Part 1|OSPF - Part 1 (Single Area Basics)]]
+- **Day 25:** 🔌 [[CCNA Course/Day 25 - OSPF - Part 2|OSPF - Part 2 (Multi-Area & DR/BDR)]]
+- **Day 26:** 🔌 [[CCNA Course/Day 26 - OSPF - Part 3|OSPF - Part 3 (Advanced Config)]]
+
+---
+> [!TIP]
+> **Obsidian Graph Shortcut:** Obsidian mein local graph open karne ke liye sidebar check karein ya `Ctrl + G` press karein. Is index ke open hone par visual graph is central node (`Course on CCNA`) se connect hote huye nodes show karega.
