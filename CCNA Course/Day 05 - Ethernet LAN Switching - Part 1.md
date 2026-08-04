@@ -89,13 +89,76 @@ MAC (Media Access Control) address ek unique 48-bit (6 bytes) physical hardware 
 ---
 
 ### B. Hexadecimal System (Base 16)
-Hexadecimal numbers ko samajhna IP address subnetting aur MAC format reads ke liye zaroori hai.
+Hexadecimal numbers ko samajhna IP address configuration, subnetting (specifically IPv6), aur MAC address structures ko read karne ke liye zaroori hai.
 
 ![Hexadecimal Conversion Chart](../images/hex_chart.jpg)
 
-*   Hexadecimal mein 16 symbols hote hain: `0-9` aur `A-F` (jahan A=10, B=11, C=12, D=13, E=14, F=15).
-*   Ek hex digit exactly **4 bits (Nybble)** ko represent karta hai. Do hex digits combine hokar **8 bits (1 Byte)** banate hain.
+*   Hexadecimal mein total **16 symbols** hote hain: `0` se `9` aur `A` se `F`.
+*   Kyunki hum double-digit values (jaise 10, 11) ko single space mein nahi likh sakte, isliye:
+    *   `10 = A`, `11 = B`, `12 = C`, `13 = D`, `14 = E`, `15 = F`
+*   Ek single Hex character exactly **4 bits (Nybble)** ko store karta hai. Do hex characters milkar **8 bits (1 Byte)** banate hain.
     *   *Example:* Decimal `255` = Binary `11111111` = Hexadecimal `FF`.
+
+---
+
+### 🧮 C. Decimal to Hexadecimal Conversion (Kaise badlein?)
+
+Decimal se Hexadecimal mein convert karne ke **do main methods** hote hain:
+
+#### 1. Method 1: Division by 16 Method (Purana aur standard method)
+*   **Rule:** Decimal number ko 16 se divide karte rahein, quotient (bhagfal) ko niche likhein, aur remainder (sheshfal) ko side mein note karein. Jab quotient 0 ho jaye, toh remainders ko **niche se upar (Reverse order)** mein likh dein.
+*   **💡 Example: Convert Decimal `203` to Hexadecimal:**
+    1.  `203` ko 16 se divide karein:
+        *   \(203 \div 16 = 12\) (Quotient)
+        *   Remainder = **11** (Hex code mein 11 ko hum **`B`** likhte hain).
+    2.  Ab Quotient `12` ko 16 se divide karein:
+        *   \(12 \div 16 = 0\) (Quotient)
+        *   Remainder = **12** (Hex code mein 12 ko hum **`C`** likhte hain).
+    3.  Quotient 0 ho gaya, process stops!
+    4.  Remainders ko bottom-to-top (reverse) read karein: **`C`** pehle, fir **`B`**.
+    *   **Result:** Decimal `203` = Hexadecimal **`CB`** (Commonly written as `0xCB`).
+
+#### 2. Method 2: Binary Bridge Shortcut (NIC cards/8-bit values ke liye sabse fast)
+*   **Rule:** Pehle decimal number ko standard 8-bit binary mein badlein. Fir us 8-bit binary ko **4-bit ke do parts (Nybbles)** mein split kar dein. Dono 4-bit binary values ko alag-alag hex character mein convert karke aapas mein combine kar dein.
+*   **💡 Example: Convert Decimal `185` to Hexadecimal:**
+    1.  `185` ko Binary mein badlein (using 128, 64, 32, 16, 8, 4, 2, 1 table):
+        *   \(128 + 32 + 16 + 8 + 1 = 185\)
+        *   Binary = `10111001`
+    2.  Binary ko 4-bit ke do groups mein divide karein:
+        *   Left Group: `1011`
+        *   Right Group: `1001`
+    3.  Dono groups ko individually evaluate karein:
+        *   `1011` = \(8 + 0 + 2 + 1 = 11\) (Decimal 11 = Hex **`B`**)
+        *   `1001` = \(8 + 0 + 0 + 1 = 9\) (Decimal 9 = Hex **`9`**)
+    4.  Combine karein: **`B9`**
+    *   **Result:** Decimal `185` = Hexadecimal **`B9`** (Written as `0xB9`).
+
+---
+
+### 🧮 D. Hexadecimal to Decimal Conversion (Kaise badlein?)
+
+Hexadecimal se Decimal mein convert karne ke liye hum positional multipliers (base 16) ka use karte hain. Right-to-left chalte hue har digit ko \(16^0\), \(16^1\), \(16^2\) and so on se multiply karte hain aur results ko add kar dete hain.
+
+*   **Rule Formula:**
+    \[\text{Value} = (\text{Digit}_2 \times 16^2) + (\text{Digit}_1 \times 16^1) + (\text{Digit}_0 \times 16^0)\]
+
+#### 💡 Example 1: Convert Hex `2F` to Decimal:
+1.  Right-most digit is `F` (value = 15). Position power is \(16^0 = 1\).
+    *   \(15 \times 1 = 15\)
+2.  Next digit to left is `2`. Position power is \(16^1 = 16\).
+    *   \(2 \times 16 = 32\)
+3.  Dono ko add karein: \(32 + 15 = 47\).
+*   **Result:** Hex `2F` = Decimal **`47`**.
+
+#### 💡 Example 2: Convert Hex `1A3` to Decimal:
+1.  Right-most digit is `3`. Position power is \(16^0 = 1\).
+    *   \(3 \times 1 = 3\)
+2.  Next digit is `A` (value = 10). Position power is \(16^1 = 16\).
+    *   \(10 \times 16 = 160\)
+3.  Left-most digit is `1`. Position power is \(16^2 = 256\).
+    *   \(1 \times 256 = 256\)
+4.  Sabhi ko add karein: \(256 + 160 + 3 = 419\).
+*   **Result:** Hex `1A3` = Decimal **`419`**.
 
 ---
 
