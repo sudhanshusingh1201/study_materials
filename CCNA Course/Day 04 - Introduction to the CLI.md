@@ -32,41 +32,46 @@ Terminal emulator mein serial connection start karte waqt niche diye gaye standa
 *   **Baud Rate (Speed):** `9600` bits/second
 *   **Data Bits:** `8` data bits
 *   **Stop Bits:** `1` stop bit
-*   **Parity:** None
 *   **Flow Control:** None
 
 ---
 
 ## 🧭 2. Cisco CLI Modes & Navigation
 
-Cisco IOS CLI security aur command limitation ke liye alag-alag level structure par chalta hai jise **Modes** kehte hain.
+Cisco IOS CLI security aur command limitations ke liye alag-alag hierarchical levels par kaam karta hai jise **Modes** kehte hain.
 
 ![CLI Modes Flowchart](../images/cli_flowchart.jpg)
 
 ### A. User EXEC Mode
 *   **Prompt:** `Router>` ya `Switch>`
-*   **Kaam:** Ye basic login screen hai jisme security level sabse lowest hoti hai. Aap sirf basic monitoring commands (jaise ping, traceroute) run kar sakte hain, configurations change nahi kar sakte.
-*   **Navigation:** Is mode se upar jane ke liye type karein: `enable`.
+*   **Kaam:** Ye basic basic login landing page hai jisme security level lowest hota hai. Aap sirf basic status check aur ping/traceroute check kar sakte hain, configuration mein koi change nahi kar sakte.
+*   **Navigation:** Is mode se upar privileged mode mein jaane ke liye type karein: `enable`.
+*   #### 💡 Real-world Analogy (Udaharan):
+    *   **Office Reception Lobby:** Jaise kisi badi office building ka public reception lobby. Koi bhi guest aakar reception board par check kar sakta hai ki building mein kaun se department hain (basic monitoring) par wo bina card ke kisi specific executive office room mein enter nahi ho sakta.
 
 ### B. Privileged EXEC Mode (Enable Mode)
 *   **Prompt:** `Router#` ya `Switch#`
-*   **Kaam:** Is mode mein network engineer ke paas troubleshooting aur show details check karne ki full permissions hoti hain. Aap settings dekh sakte hain aur save kar sakte hain, par modify nahi kar sakte.
+*   **Kaam:** Is mode mein user ke paas system details read karne ki full rights hoti hain (jaise active hardware ports ya system memory check karna). Aap configuration file ko read ya reboot kar sakte hain, par dynamically parameters modify nahi kar sakte.
 *   **Navigation:**
     *   Niche User mode mein wapas jaane ke liye: `disable`.
-    *   Upar configurations change karne wale mode mein jaane ke liye: `configure terminal` (ya shortcut `conf t`).
+    *   Upar configuration mode mein jaane ke liye: `configure terminal` (shortcut `conf t`).
+*   #### 💡 Real-world Analogy (Udaharan):
+    *   **Building Inspector/Supervisor:** Jaise building security supervisor jiske paas har room ki master key hai. Wo har office room ke file rack ko open karke check kar sakta hai, inspect kar sakta hai, aur files read kar sakta hai (troubleshoot show commands), par wo building ke wall structures ko change nahi kar sakta.
 
 ### C. Global Configuration Mode
 *   **Prompt:** `Router(config)#` ya `Switch(config)#`
-*   **Kaam:** Is mode mein kiye gaye badlav poore network device par globally implement hote hain (jaise hostname badalna ya banner add karna).
+*   **Kaam:** Is mode mein entered commands global level par implement hoti hain (jaise switch IP set karna, hostname change karna, enable passwords configure karna).
 *   **Navigation:**
-    *   Privileged EXEC mode mein drop karne ke liye: `exit` type karein.
+    *   Privileged EXEC mode mein wapas jaane ke liye: `exit` type karein.
     *   Direct Privileged EXEC mode (root level) par aane ke liye press karein: `end` ya shortcut `Ctrl + Z`.
+*   #### 💡 Real-world Analogy (Udaharan):
+    *   **Building Architect/Owner:** Jaise building architect ya owner, jo deewarein tod kar naya room bana sakta hai (VLAN structure), routing corridors badal sakta hai, ya door locks change kar sakta hai.
 
 ### D. Sub-Configuration Modes (Specific Modes)
-Global configuration se hum specific components ke details ko modify karne ke liye sub-modes mein jate hain:
-*   **Interface Configuration Mode:** Specific interfaces (jaise port g0/1) configure karne ke liye.
-    *   *Command:* `interface gigabitethernet 0/1` (shortcut `int g0/1`) -> Prompt: `Router(config-if)#`
-*   **Line Configuration Mode:** Management access interfaces (jaise console terminal, virtual SSH line access) configure karne ke liye.
+Global configuration se specific ports ya physical lines select karke unke config modes mein jata hai:
+*   **Interface Configuration Mode:** Specific ports (jaise port FastEthernet 0/1) config karne ke liye.
+    *   *Command:* `interface FastEthernet 0/1` (shortcut `int fa0/1`) -> Prompt: `Router(config-if)#`
+*   **Line Configuration Mode:** Device console line ya remote network access lines configure karne ke liye.
     *   *Command:* `line console 0` -> Prompt: `Router(config-line)#`
 
 ---
@@ -84,7 +89,7 @@ Cisco CLI ko fast aur error-free chalane ke liye system mein shortcuts hotey hai
 
 ### B. Common Error Messages:
 *   `% Ambiguous command:` CLI ko samajh nahi aaya ki aap kaun si command run karna chahte hain kyunki us short phrase se multiple commands start hoti hain (e.g. `c` likhne par clear, configure dono ho sakte hain).
-*   `% Incomplete command:` Command toh sahi hai par aapne requirements ke according aage ke parameters (e.g., interface ID) nahi likhe.
+*   `% Incomplete command:` Command toh sahli hai par aapne requirements ke according aage ke parameters (e.g., interface ID) nahi likhe.
 *   `% Invalid input detected at '^' marker:` Command syntax mein error hai. '^' marker exact point show karta hai jahan typing error hui hai.
 
 ---
@@ -97,34 +102,96 @@ Cisco devices mein switch/router settings do main positions par store hoti hain:
 
 ### 1. Running Configuration:
 *   **Location:** RAM (Random Access Memory).
-*   **Status:** Volatile (temporarily loaded). Agar device switch off (reboot) ho jaye, toh saara content delete ho jayega.
+*   **Status:** Volatile (temporarily loaded). Agar device switch off (reboot) ho jaye, toh saara active configuration content delete ho jayega.
 *   **File Name:** `running-config`
+*   #### 💡 Real-world Analogy (Udaharan):
+    *   **Classroom Whiteboard:** Jaise class chalte waqt whiteboard par rough notes likhna. Jab tak class chal rahi hai (device running state mein hai), data safe hai, par jaise hi class over hui ya kisi ne cleaner se wipe kiya (power off/reboot), whiteboard poora blank ho jayega!
 
 ### 2. Startup Configuration:
 *   **Location:** NVRAM (Non-Volatile RAM).
 *   **Status:** Non-volatile (persistently saved). Device restart hone par bhi data delete nahi hota. Boot process par system is file ko select karke execute karta hai.
 *   **File Name:** `startup-config`
+*   #### 💡 Real-world Analogy (Udaharan):
+    *   **Student Notebook:** Whiteboard par likhe rough notes ko permanent pen se notebook par note down karna. Notebook par likha data hamesha permanent rahega, chahe classroom switch off ho jaye ya lights off ho jayein.
 
 ### Configurations Save Kaise Karein?
-Configurations ko modify karne ke baad, use save karne ke liye hum running-config ke data ko startup-config mein copy karte hain:
+Whiteboard ke active text ko notebook mein copy karne ke process ko saving kehte hain:
 *   *Command:* `copy running-config startup-config` (shortcut `copy run start`)
 *   *Legacy/Common Alternate:* `write` (shortcut `wr`)
 
+---rtcut `wr`)
+
 ---
 
-## 🧪 5. Day 04 Lab: CLI Mode Navigation Commands Cheat-Sheet
+## 🧪 5. Day 04 Lab: Cisco CLI Basic Configuration Walkthrough
 
-Day 4 ke Packet Tracer lab mein hum switch configurations set up karne ki commands seekhte hain:
+Jeremy's Day 4 Lab mein hum ek switch (S1) par basic security aur administrative configurations implement karte hain. Niche is lab ke saare tasks aur unke solutions diye gaye hain:
 
+### Tasks to Perform:
+1.  **Change Hostname:** Switch ka default name badalkar `S1` karein.
+2.  **Enable Password:** Cleartext enable password set karein `cisco`.
+3.  **Enable Secret:** Encrypted enable secret password set karein `cisco123`.
+4.  **Security Testing:** Dono passwords configure karne ke baad verify karein ki login ke waqt kaun sa password work karta hai.
+5.  **Secure Console Line:** Console port access ko password `cisco` se secure karein.
+6.  **Secure VTY Lines:** Remote access lines (VTY 0 to 15) ko password `cisco` se secure karein.
+7.  **Configure MOTD Banner:** Unauthorized access warning message set karein.
+8.  **Save Changes:** Configurations ko running-config se startup-config (NVRAM) mein copy karein.
+
+---
+
+### Step-by-Step CLI Solutions:
+
+#### Step 1: Hostname Badlein
 ```ios
-Switch> enable                                   ! User EXEC mode se Privileged EXEC mode mein jaane ke liye
-Switch# configure terminal                      ! Global Configuration mode mein jaane ke liye
-Switch(config)# hostname CCNA_Switch            ! Device ka hostname badalne ke liye
-CCNA_Switch(config)# interface FastEthernet 0/1 ! Port config mode mein jaane ke liye
-CCNA_Switch(config-if)# description Link_To_PC1 ! Port description set karne ke liye
-CCNA_Switch(config-if)# exit                    ! Interface mode se exit karke global config mode mein aane ke liye
-CCNA_Switch(config)# exit                       ! Global config mode se exit karke privileged mode mein aane ke liye
-CCNA_Switch# copy running-config startup-config  ! Apne changes ko device memory (NVRAM) mein permanently save karne ke liye
+Switch> enable
+Switch# configure terminal
+Switch(config)# hostname S1
+S1(config)#
+```
+
+#### Step 2: Enable Passwords (Password vs Secret) Configure Karein
+```ios
+S1(config)# enable password cisco
+S1(config)# enable secret cisco123
+```
+> [!IMPORTANT]
+> **Key Concept:** `enable secret` password strongly encrypted (MD5/SHA) hota hai aur ye `enable password` (clear-text) ko overrides kar deta hai. Jab aap next time mode change karenge, toh aapko `cisco123` hi enter karna hoga, `cisco` work nahi karega.
+
+#### Step 3: Console Port ko Secure Karein (Physical Line Security)
+Console line par password prompt enable karne ke liye password ke sath `login` command lagana mandatory hai:
+```ios
+S1(config)# line console 0
+S1(config-line)# password cisco
+S1(config-line)# login
+S1(config-line)# exit
+```
+
+#### Step 4: VTY Lines ko Secure Karein (Remote Connection Security)
+Virtual lines (VTY) Telnet/SSH connections ke liye hoti hain:
+```ios
+S1(config)# line vty 0 15
+S1(config-line)# password cisco
+S1(config-line)# login
+S1(config-line)# exit
+```
+
+#### Step 5: Banner MOTD Set Karein
+Warning message config karne ke liye text ko delimiters (jaise `#` ya `$`) ke beech wrap karein:
+```ios
+S1(config)# banner motd # WARNING: Unauthorized Access is Strictly Prohibited! #
+S1(config)# exit
+```
+
+#### Step 6: Verify and Save to NVRAM
+Apne changes verify karne ke liye Privileged EXEC mode mein `show running-config` run karein aur use save karein:
+```ios
+S1# show running-config
+! (Yahan aapko 'enable secret' encrypted aur 'enable password' clear text mein dikhega)
+
+S1# copy running-config startup-config
+Destination filename [startup-config]? [Enter]
+Building configuration...
+[OK]
 ```
 
 ---
