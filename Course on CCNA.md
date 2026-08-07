@@ -12,6 +12,12 @@ type: course-hub
 
 # 🎓 Course on CCNA (Jeremy's IT Lab Day-by-Day)
 
+> [!IMPORTANT]
+> **🚀 CCNA Day 1-5 Practice Quiz App is Ready!**
+> Day 1 to Day 5 (except Day 4) ka detailed test dene ke liye yahan click karein: 
+> **[👉 Open CCNA Quiz App](file:///C:/Users/Sudhanshu%20Singh/OneDrive/Documents/study_material/CCNA_Quiz_App.html)**
+> *(Note: HTML files Obsidian file explorer me default hidden hoti hain, isliye aap is link par click karke use browser me open karein).*
+
 Welcome to the CCNA Study Vault! Ye notebook **Jeremy's IT Lab CCNA 200-301 Complete Course** ke Day-by-Day schedule ko track karne ke liye hai. Yahan aapke saare learning sessions ke notes, CLI configurations, Cisco Packet Tracer labs, aur visual diagrams safe रहेंगे.
 
 ---

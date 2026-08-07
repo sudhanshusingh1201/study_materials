@@ -1,0 +1,2220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CCNA Interactive Study Quiz - Jeremy's IT Lab (Day 1-5)</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-primary: #0a0e17;
+            --bg-secondary: #131926;
+            --bg-glass: rgba(19, 25, 38, 0.75);
+            --border-glass: rgba(255, 255, 255, 0.08);
+            --accent-blue: #00d2ff;
+            --accent-blue-rgb: 0, 210, 255;
+            --accent-purple: #9d4edd;
+            --accent-purple-rgb: 157, 78, 221;
+            --text-primary: #f8f9fa;
+            --text-secondary: #a0aec0;
+            --text-muted: #718096;
+            --success: #00e676;
+            --success-rgb: 0, 230, 118;
+            --danger: #ff1744;
+            --danger-rgb: 255, 23, 68;
+            --warning: #ffb74d;
+            --font-title: 'Outfit', sans-serif;
+            --font-body: 'Inter', sans-serif;
+            --font-mono: 'Fira Code', monospace;
+            --shadow-glow: 0 8px 32px 0 rgba(0, 210, 255, 0.15);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-primary);
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(var(--accent-blue-rgb), 0.1) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(var(--accent-purple-rgb), 0.1) 0px, transparent 50%),
+                linear-gradient(180deg, var(--bg-primary) 0%, #06080d 100%);
+            color: var(--text-primary);
+            font-family: var(--font-body);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 2rem 1rem;
+            overflow-x: hidden;
+        }
+
+        /* Ambient glowing circles */
+        .ambient-glow {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: filter(blur(80px));
+            z-index: -1;
+            opacity: 0.3;
+        }
+
+        .glow-1 {
+            top: 10%;
+            left: 10%;
+            background: var(--accent-blue);
+            filter: blur(120px);
+        }
+
+        .glow-2 {
+            bottom: 10%;
+            right: 10%;
+            background: var(--accent-purple);
+            filter: blur(120px);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 900px;
+            z-index: 10;
+        }
+
+        /* Glassmorphism Header */
+        header {
+            text-align: center;
+            margin-bottom: 2rem;
+            background: var(--bg-glass);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--border-glass);
+            border-radius: 20px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow-glow);
+        }
+
+        header h1 {
+            font-family: var(--font-title);
+            font-size: 2.2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--accent-blue) 0%, var(--accent-purple) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.5px;
+        }
+
+        header p {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            font-weight: 400;
+        }
+
+        header .tag {
+            display: inline-block;
+            background: rgba(var(--accent-blue-rgb), 0.15);
+            border: 1px solid rgba(var(--accent-blue-rgb), 0.3);
+            color: var(--accent-blue);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-top: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Cards and Containers */
+        .card {
+            background: var(--bg-glass);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--border-glass);
+            border-radius: 24px;
+            padding: 2.5rem;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            transition: transform 0.3s ease, border-color 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 1.5rem;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple));
+            opacity: 0.8;
+        }
+
+        /* Screen Transitions */
+        .screen {
+            display: none;
+        }
+
+        .screen.active {
+            display: block;
+            animation: fadeIn 0.4s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Selection/Dashboard Style */
+        .menu-title {
+            font-family: var(--font-title);
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .grid-2 {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .mode-btn {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-glass);
+            border-radius: 20px;
+            padding: 2rem;
+            cursor: pointer;
+            text-align: left;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .mode-btn::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0%;
+            height: 3px;
+            background: var(--accent-blue);
+            transition: width 0.3s ease;
+        }
+
+        .mode-btn:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(var(--accent-blue-rgb), 0.3);
+            transform: translateY(-4px);
+            box-shadow: 0 10px 20px rgba(0, 210, 255, 0.08);
+        }
+
+        .mode-btn:hover::after {
+            width: 100%;
+        }
+
+        .mode-btn.purple::after {
+            background: var(--accent-purple);
+        }
+        .mode-btn.purple:hover {
+            border-color: rgba(var(--accent-purple-rgb), 0.3);
+            box-shadow: 0 10px 20px rgba(157, 78, 221, 0.08);
+        }
+
+        .mode-icon {
+            font-size: 2.5rem;
+        }
+
+        .mode-name {
+            font-family: var(--font-title);
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .mode-desc {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        /* Day Selector Grid */
+        .day-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .day-btn {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-glass);
+            border-radius: 16px;
+            padding: 1.25rem;
+            cursor: pointer;
+            text-align: center;
+            font-family: var(--font-title);
+            font-weight: 600;
+            font-size: 1.05rem;
+            transition: all 0.25s ease;
+            color: var(--text-primary);
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .day-btn:hover {
+            background: rgba(var(--accent-blue-rgb), 0.1);
+            border-color: rgba(var(--accent-blue-rgb), 0.5);
+            transform: translateY(-2px);
+        }
+
+        .day-btn .day-num {
+            font-size: 0.8rem;
+            color: var(--accent-blue);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .day-btn.disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+            border-style: dashed;
+        }
+
+        .day-btn.disabled:hover {
+            background: transparent;
+            border-color: var(--border-glass);
+            transform: none;
+        }
+
+        /* Quiz Layout */
+        .quiz-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .progress-bar-container {
+            width: 100%;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 3px;
+            margin-bottom: 2rem;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-bar {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple));
+            transition: width 0.3s ease;
+            border-radius: 3px;
+        }
+
+        .question-text {
+            font-size: 1.25rem;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+            font-weight: 500;
+        }
+
+        .options-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .option-btn {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-glass);
+            border-radius: 16px;
+            padding: 1.2rem 1.5rem;
+            text-align: left;
+            font-size: 1rem;
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            line-height: 1.4;
+        }
+
+        .option-letter {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-glass);
+            font-family: var(--font-title);
+            font-weight: 700;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            flex-shrink: 0;
+            transition: all 0.2s ease;
+        }
+
+        .option-btn:hover:not(.disabled) {
+            background: rgba(255, 255, 255, 0.06);
+            border-color: rgba(var(--accent-blue-rgb), 0.4);
+            transform: translateX(4px);
+        }
+
+        .option-btn:hover:not(.disabled) .option-letter {
+            background: rgba(var(--accent-blue-rgb), 0.15);
+            border-color: var(--accent-blue);
+            color: var(--accent-blue);
+        }
+
+        /* Option selection states */
+        .option-btn.selected {
+            background: rgba(var(--accent-blue-rgb), 0.1);
+            border-color: var(--accent-blue);
+        }
+
+        .option-btn.correct {
+            background: rgba(var(--success-rgb), 0.1);
+            border-color: var(--success);
+        }
+
+        .option-btn.correct .option-letter {
+            background: var(--success);
+            border-color: var(--success);
+            color: #000;
+        }
+
+        .option-btn.incorrect {
+            background: rgba(var(--danger-rgb), 0.1);
+            border-color: var(--danger);
+        }
+
+        .option-btn.incorrect .option-letter {
+            background: var(--danger);
+            border-color: var(--danger);
+            color: #fff;
+        }
+
+        .option-btn.disabled {
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        /* Action Buttons */
+        .action-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, var(--accent-blue) 0%, #0099ff 100%);
+            border: none;
+            color: #000;
+            padding: 1rem 2rem;
+            border-radius: 16px;
+            font-family: var(--font-title);
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 15px rgba(0, 210, 255, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn:hover:not(.disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 210, 255, 0.3);
+        }
+
+        .btn:active:not(.disabled) {
+            transform: translateY(0);
+        }
+
+        .btn.secondary {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-glass);
+            color: var(--text-primary);
+            box-shadow: none;
+        }
+
+        .btn.secondary:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.15);
+            box-shadow: none;
+        }
+
+        .btn.disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+
+        /* Explanation Box */
+        .explanation-box {
+            margin-top: 2rem;
+            background: rgba(var(--accent-blue-rgb), 0.05);
+            border: 1px solid rgba(var(--accent-blue-rgb), 0.2);
+            border-left: 5px solid var(--accent-blue);
+            border-radius: 16px;
+            padding: 1.5rem;
+            animation: slideDown 0.3s ease-out;
+            display: none;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .explanation-title {
+            font-family: var(--font-title);
+            font-weight: 700;
+            color: var(--accent-blue);
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .explanation-text {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: var(--text-secondary);
+        }
+
+        .explanation-text strong {
+            color: var(--text-primary);
+        }
+
+        /* Math and diagram boxes */
+        .math-box {
+            font-family: var(--font-mono);
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            padding: 0.5rem 1rem;
+            margin: 0.5rem 0;
+            display: inline-block;
+            color: var(--accent-blue);
+        }
+
+        /* Timer and counter badge */
+        .timer-badge {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-glass);
+            border-radius: 10px;
+            padding: 0.4rem 0.8rem;
+            font-family: var(--font-mono);
+            color: var(--warning);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .count-badge {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-glass);
+            border-radius: 10px;
+            padding: 0.4rem 0.8rem;
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        /* Score screen styles */
+        .score-circle-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+
+        .score-circle {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            background: radial-gradient(circle, var(--bg-secondary) 60%, transparent 100%);
+            border: 6px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 30px rgba(var(--accent-blue-rgb), 0.1);
+            position: relative;
+        }
+
+        .score-val {
+            font-family: var(--font-title);
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--accent-blue);
+            line-height: 1;
+        }
+
+        .score-label {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-top: 0.25rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-glass);
+            border-radius: 16px;
+            padding: 1rem;
+        }
+
+        .stat-num {
+            font-family: var(--font-title);
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+
+        .stat-num.success { color: var(--success); }
+        .stat-num.danger { color: var(--danger); }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .result-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        /* Review Section */
+        .review-section {
+            margin-top: 3rem;
+            border-top: 1px solid var(--border-glass);
+            padding-top: 2rem;
+        }
+
+        .review-title {
+            font-family: var(--font-title);
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+
+        .review-item {
+            background: rgba(255, 255, 255, 0.01);
+            border: 1px solid var(--border-glass);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .review-item.incorrect-review {
+            border-left: 4px solid var(--danger);
+        }
+
+        .review-item.correct-review {
+            border-left: 4px solid var(--success);
+        }
+
+        .review-q {
+            font-weight: 600;
+            font-size: 1.05rem;
+            margin-bottom: 1rem;
+        }
+
+        .review-ans-row {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
+
+        .review-ans {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .review-ans .badge {
+            padding: 0.2rem 0.5rem;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .badge.correct-badge {
+            background: rgba(var(--success-rgb), 0.15);
+            color: var(--success);
+        }
+
+        .badge.user-badge {
+            background: rgba(var(--danger-rgb), 0.15);
+            color: var(--danger);
+        }
+
+        .badge.neutral-badge {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-secondary);
+        }
+    </style>
+</head>
+<body>
+    <div class="ambient-glow glow-1"></div>
+    <div class="ambient-glow glow-2"></div>
+
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <h1>CCNA Interactive Study Quiz</h1>
+            <p>Jeremy's IT Lab CCNA 200-301 Study Buddy</p>
+            <span class="tag">Day 1 to 5 (Excluding Day 4 CLI)</span>
+        </header>
+
+        <!-- DASHBOARD SCREEN -->
+        <div id="screen-dashboard" class="screen active">
+            <div class="card">
+                <div class="menu-title">
+                    <span>⚡ Choose Quiz Mode</span>
+                    <span style="font-size: 0.8rem; background: rgba(0, 210, 255, 0.15); color: var(--accent-blue); padding: 0.25rem 0.6rem; border-radius: 10px; margin-left: auto; border: 1px solid rgba(0, 210, 255, 0.3);">81 Questions Loaded</span>
+                </div>
+                <div class="grid-2">
+                    <button class="mode-btn" onclick="selectMode('practice')">
+                        <span class="mode-icon">📖</span>
+                        <span class="mode-name">Practice Mode</span>
+                        <span class="mode-desc">Untimed practice. Select specific Days to study. Answers show instant explanations in Hinglish/English.</span>
+                    </button>
+                    <button class="mode-btn purple" onclick="selectMode('mock')">
+                        <span class="mode-icon">🏆</span>
+                        <span class="mode-name">Mock Exam Mode</span>
+                        <span class="mode-desc">20 Random mixed questions. Timed (15 minutes). Explanations shown only at the end. Verify your score!</span>
+                    </button>
+                </div>
+
+                <div id="day-selector-container" style="display: none; animation: fadeIn 0.3s ease-out;">
+                    <div class="menu-title" style="margin-top: 1rem; border-top: 1px solid var(--border-glass); padding-top: 1.5rem;">
+                        📅 Select Day Module
+                    </div>
+                    <div class="day-grid">
+                        <button class="day-btn" onclick="startPractice(1)">
+                            <span class="day-num">Day 01</span>
+                            <span>Network Devices</span>
+                        </button>
+                        <button class="day-btn" onclick="startPractice(2)">
+                            <span class="day-num">Day 02</span>
+                            <span>Cables & Interfaces</span>
+                        </button>
+                        <button class="day-btn" onclick="startPractice(3)">
+                            <span class="day-num">Day 03</span>
+                            <span>OSI & TCP/IP Model</span>
+                        </button>
+                        <button class="day-btn disabled" title="Day 04 (CLI) is excluded by request">
+                            <span class="day-num" style="color: var(--text-muted);">Day 04</span>
+                            <span style="color: var(--text-muted);">Introduction to CLI (Skip)</span>
+                        </button>
+                        <button class="day-btn" onclick="startPractice(5)">
+                            <span class="day-num">Day 05</span>
+                            <span>LAN Switching</span>
+                        </button>
+                        <button class="day-btn" onclick="startPractice('all')" style="background: rgba(var(--accent-purple-rgb), 0.15); border-color: rgba(var(--accent-purple-rgb), 0.3);">
+                            <span class="day-num" style="color: var(--accent-purple);">Mixed</span>
+                            <span>All Days Combined</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- QUIZ GAME SCREEN -->
+        <div id="screen-quiz" class="screen">
+            <div class="card">
+                <div class="quiz-header">
+                    <span id="question-index-badge" class="count-badge">Question 1/10</span>
+                    <span id="quiz-timer" class="timer-badge" style="display: none;">⏱️ 15:00</span>
+                    <span id="quiz-mode-label" style="text-transform: uppercase; font-weight: 700; color: var(--accent-blue); letter-spacing: 1px;">PRACTICE MODE</span>
+                </div>
+                
+                <div class="progress-bar-container">
+                    <div id="quiz-progress" class="progress-bar"></div>
+                </div>
+
+                <div id="question-box">
+                    <div id="q-text" class="question-text">Loading question...</div>
+                    <div id="options-box" class="options-list">
+                        <!-- Options generated by JS -->
+                    </div>
+                </div>
+
+                <!-- Explanation Box (shown in practice mode after selection) -->
+                <div id="explanation-box" class="explanation-box">
+                    <div class="explanation-title">💡 Explanation (Samjho Concept Ko):</div>
+                    <div id="explanation-content" class="explanation-text">Explanation content...</div>
+                </div>
+
+                <div class="action-container" style="margin-top: 2rem; border-top: 1px solid var(--border-glass); padding-top: 1.5rem;">
+                    <button class="btn secondary" onclick="exitQuiz()">🏠 Quit Quiz</button>
+                    <button id="next-btn" class="btn disabled" onclick="nextQuestion()" disabled>Next Question ➡️</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- SCORE/RESULTS SCREEN -->
+        <div id="screen-results" class="screen">
+            <div class="card" style="text-align: center;">
+                <div class="menu-title" style="justify-content: center; font-size: 1.8rem; margin-bottom: 2rem;">🎉 Quiz Completed!</div>
+                
+                <div class="score-circle-container">
+                    <div class="score-circle">
+                        <span id="result-score-percent" class="score-val">80%</span>
+                        <span class="score-label">Score</span>
+                    </div>
+                </div>
+
+                <div class="stat-grid">
+                    <div class="stat-card">
+                        <div id="stat-total" class="stat-num">20</div>
+                        <div class="stat-label">Total Qs</div>
+                    </div>
+                    <div class="stat-card">
+                        <div id="stat-correct" class="stat-num success">16</div>
+                        <div class="stat-label">Correct</div>
+                    </div>
+                    <div class="stat-card">
+                        <div id="stat-time" class="stat-num">02:14</div>
+                        <div class="stat-label">Time Taken</div>
+                    </div>
+                </div>
+
+                <div id="result-feedback-text" style="font-size: 1.1rem; color: var(--text-secondary); margin-bottom: 2rem; line-height: 1.6;">
+                    Bahut badhiya! Aapka basic commands aur cabling logic solid chal raha hai.
+                </div>
+
+                <div class="result-actions">
+                    <button class="btn" onclick="restartQuiz()">🔄 Try Again</button>
+                    <button class="btn secondary" onclick="exitQuiz()">🏠 Dashboard</button>
+                </div>
+            </div>
+
+            <!-- Review Items List -->
+            <div id="review-container" class="review-section">
+                <!-- Dynamically generated list of review questions -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Questions Database -->
+    <script>
+        const questions = [
+            // DAY 1 (Network Devices)
+            {
+                id: 1,
+                day: 1,
+                q: "Kaun sa network device Layer 1 (Physical Layer) par kaam karta hai, jiske paas forwarding intelligence nahi hoti aur wo aane wale traffic ko access ports par blind broadcast (copy) kar deta hai?",
+                options: [
+                    "Network Switch",
+                    "Network Router",
+                    "Network Hub",
+                    "Wireless Access Point (AP)"
+                ],
+                correct: 2,
+                explanation: "<strong>Hub (Layer 1)</strong> ek purana device hai jo bina kisi intelligent decision ke har frame ko broadcast kar deta hai (except incoming port). Ise hum class ke <strong>Megaphone Example</strong> se samajhte hain - teacher megaphone par bolti hai toh sabko sunna padta hai, chahe letter kisi ek ke liye hi ho."
+            },
+            {
+                id: 2,
+                day: 1,
+                q: "Switch (Layer 2 device) local LAN network ke hosts ko locate aur dynamic data delivery karne ke liye kis unique identifier address ka use karta hai?",
+                options: [
+                    "IP Address (Logical Address)",
+                    "MAC Address (Physical Address)",
+                    "Subnet Mask",
+                    "Port Number"
+                ],
+                correct: 1,
+                explanation: "<strong>Switch (Layer 2)</strong> frame forwarding ke liye <strong>MAC Address (Media Access Control)</strong> ka use karta hai. Iska table (MAC address table) check karke ye targeted unicast delivery karta hai. Real-world example: <strong>Private Postman/Courier</strong> jo address padhkar seedhe usi house par delivery karta hai."
+            },
+            {
+                id: 3,
+                day: 1,
+                q: "Router (Layer 3 network device) alag-alag networks ke beech packet routing aur optimal path select karne ke liye kis system standard address ka use karta hai?",
+                options: [
+                    "MAC Address",
+                    "IP Address",
+                    "VLAN ID",
+                    "Preamble Bits"
+                ],
+                correct: 1,
+                explanation: "<strong>Router (Layer 3)</strong> networks ko connect karne aur route decisions ke liye <strong>IP Address</strong> check karta hai. Analogy: <strong>Airport Sorting Center</strong> jo local mail ko address verify karke destination flight/route par sorting karta hai."
+            },
+            {
+                id: 4,
+                day: 1,
+                q: "Ek security guard jo check cards verify karke unauthorized traffic block karta hai, use hum network security mein kis device se represent karte hain?",
+                options: [
+                    "DHCP Server",
+                    "Enterprise Router",
+                    "Access Point",
+                    "Firewall"
+                ],
+                correct: 3,
+                explanation: "<strong>Firewall</strong> building security guard ki tarah kaam karta hai. Ye security policies aur standard <strong>ACLs (Access Control Lists)</strong> ke basis par access allow ya block karta hai."
+            },
+            {
+                id: 5,
+                day: 1,
+                q: "Enterprise network architecture mein multiple wireless Access Points (APs) ko centralized place se secure control, config update aur manage karne ke liye kis network device ka use hota hai?",
+                options: [
+                    "Wireless LAN Controller (WLC)",
+                    "Core Router",
+                    "SOHO Router",
+                    "L2 Ethernet Switch"
+                ],
+                correct: 0,
+                explanation: "<strong>WLC (Wireless LAN Controller)</strong> dynamic controllers hain jo enterprise network ke saare Access Points ko central manager platform se configuration controls control karte hain. Analogy: <strong>Hotel Wi-Fi System</strong> jahan standard AP roaming management centrally dynamic control center (WLC) se handle hoti hai."
+            },
+            {
+                id: 6,
+                day: 1,
+                q: "Home internet connection ke liye jo basic SOHO Router use hota hai, us device case ke andar actually kaun-kaun se devices multi-functional role control karte hain?",
+                options: [
+                    "Sirf Router core circuitry",
+                    "Switch, Router, Access Point (AP), aur basic Firewall",
+                    "Hub, WLC Controller, aur DNS server",
+                    "Wireless AP aur Server module"
+                ],
+                correct: 1,
+                explanation: "<strong>SOHO (Small Office / Home Office) Router</strong> ek combined module hai. Us compact hardware panel ke andar local Switch ports, dynamic routing capacity, wireless transmitter (AP), aur physical security filtering rules (Firewall) active rehte hain."
+            },
+            {
+                id: 7,
+                day: 1,
+                q: "PC se Switch connect karte waqt interface lights check karte samay agar cable port orange/amber color blinking state dikhaye, toh iska status kya hota hai?",
+                options: [
+                    "Cable configuration crash ho chuki hai.",
+                    "Interface port hardware damaged hai.",
+                    "Spanning Tree Protocol (STP) check checking phase mein hai taaki loop protection verify ho ske.",
+                    "IP Address conflict alert error hai."
+                ],
+                correct: 2,
+                explanation: "Cisco switches par jab straight-through cable lagti hai toh port state active hone ke liye 30-50 seconds transition status leta hai. STP (Spanning Tree Protocol) logical loop check karta hai, ise hi <strong>Amber/Orange Link Light</strong> stage kehte hain."
+            },
+            {
+                id: 8,
+                day: 1,
+                q: "Cisco Packet Tracer software interface workspace rules mein 'Logical' aur 'Physical' mode layouts ke use mein basic target logical difference kya hai?",
+                options: [
+                    "Logical speed check karta hai aur Physical visual errors check karta hai.",
+                    "Logical workspace dynamic routing and configurations design karne ke liye hai. Physical layout maps geographic levels (cities, building rooms, wiring closets).",
+                    "Logical code compilation ke liye hota hai aur Physical cable diagnostic ke liye.",
+                    "Logical and Physical are just two theme modes (Dark and Light)."
+                ],
+                correct: 1,
+                explanation: "<strong>Logical Workspace</strong> hume switches, routers select aur logical link lines create karne deta hai. <strong>Physical Workspace</strong> geographic distance layouts coordinate maps (Cities, Buildings, and Wiring Closet layout rack view) represent karta hai."
+            },
+            {
+                id: 9,
+                day: 1,
+                q: "Ek host client PC se data server tak access flow standard serial path design sequence layout logic network topology mein kya banega?",
+                options: [
+                    "PC -> Router -> Switch -> Internet -> Server",
+                    "PC -> Switch -> Router -> Internet -> Server",
+                    "PC -> Firewall -> Router -> Switch -> Server",
+                    "PC -> Access Point -> Switch -> WLC -> Server"
+                ],
+                correct: 1,
+                explanation: "Normal host client connection sequential flow: <strong>PC (Client) -> Switch (Local LAN) -> Router (Gateway/L3 boundary) -> Internet (WAN) -> Server (Target Services)</strong>."
+            },
+            {
+                id: 10,
+                day: 1,
+                q: "PC se PC or Router directly physical cable connectivity check setup test design connect switch frame direct interfaces setup line provide testing tool command prompt utility kaun si run hoti hai?",
+                options: [
+                    "ipconfig /all",
+                    "tracert route",
+                    "ping IP_Address (ICMP protocol)",
+                    "nslookup lookup"
+                ],
+                correct: 2,
+                explanation: "Network layer active connectivity test checking connectivity tool utility is standard <strong>ping command</strong> (using ICMP echo request/reply packet sequence)."
+            },
+
+            // DAY 2 (Interfaces and Cables)
+            {
+                id: 11,
+                day: 2,
+                q: "Network data transmissions standard rules mein 1 Gbps parameter values bits per second scale standard conversion scale value calculation kitni aati hai?",
+                options: [
+                    "1,000,000 bps (1 Million)",
+                    "1,000,000,000 bps (1 Billion)",
+                    "100,000,000 bps",
+                    "8,000,000,000 bps"
+                ],
+                correct: 1,
+                explanation: "Networking speeds ko standard metric bits per second (bps) check control metrics mapping define metrics: 1 Kbps = 1,000 bps; 1 Mbps = 1,000,000 bps; <strong>1 Gbps = 1,000,000,000 bps (1 Billion bits per second or 1,000 Mbps)</strong>."
+            },
+            {
+                id: 12,
+                day: 2,
+                q: "UTP/STP copper cables ke inner design configuration settings parameter wiring standards twist system apply hone ka physics scientific logic network interference control mein kya logical role block banata hai?",
+                options: [
+                    "Kyunki twist wiring bandwidth high range support capacity enhance karta hai.",
+                    "Electromagnetic Interference (EMI) aur adjacent parallel wires ke cross-signal interaction (Crosstalk) sound signals distortions ko cancel/minimize karne ke liye.",
+                    "Twisted design wiring corrosion protect rules resistance provide karta hai.",
+                    "Twist structures electrical charge voltage control stability generate rules logic active set."
+                ],
+                correct: 1,
+                explanation: "Parallel electrical flows lines aapas mein magnetic fields cross impact generate details signal logic parameters crash structure damage prevent standard twist design wires system parameters <strong>EMI</strong> and <strong>Crosstalk</strong> effects ko minimize karne ke liye structural physics method configuration balance support control rules."
+            },
+            {
+                id: 13,
+                day: 2,
+                q: "Gigabit Ethernet speed (1 Gbps) parameters maximum limits complete 100 meters path distance distance range ensure rules specifications guidelines design standard rules core category wiring copper standard setup minimum parameter category standard criteria rules dynamic setup standard range limit define criteria kya hai?",
+                options: [
+                    "Cat 3",
+                    "Cat 5",
+                    "Cat 5e",
+                    "Cat 6a only"
+                ],
+                correct: 2,
+                explanation: "Fast Ethernet (100 Mbps) can run on legacy Cat 5. But for <strong>Gigabit Ethernet (1 Gbps) over 100 meters</strong>, the minimum category standard required is <strong>Cat 5e</strong>. Cat 6 standard speeds scale up to 10 Gbps (upto 55m)."
+            },
+            {
+                id: 14,
+                day: 2,
+                q: "Dono ends par dynamic physical structure interfaces pin allocations direct straight 1-to-1 connection layouts structure T568B standard mapping setups run standard system cable type mapping application standard criteria logic parameter switch to server connections mapping mein standard configurations rules device mappings control category options standard select options setup layout parameters apply use kaun sa type represent standard structure?",
+                options: [
+                    "Crossover Cable",
+                    "Console Cable",
+                    "Straight-Through Cable",
+                    "Rollover Cable"
+                ],
+                correct: 2,
+                explanation: "Different categories hosts device systems interface links (e.g. PC to Switch, Switch to Router) use <strong>Straight-Through Cable</strong> (where pins map 1-to-1 on both sides T568B to T568B or T568A to T568A). Analogy: <strong>Courier Boy to Customer</strong> (different roles)."
+            },
+            {
+                id: 15,
+                day: 2,
+                q: "Homogeneous device settings interfaces structures connection details (e.g. Switch to Switch or Router to Router or PC to PC connection direct link physical configurations) connect connections layout standards copper pin swapping Tx with Rx swapping configurations layout category standard logical path parameter physical links configuration category rules options connect design setups standard path type select?",
+                options: [
+                    "Crossover Cable",
+                    "Straight-Through Cable",
+                    "Fiber MMF",
+                    "Serial Cable"
+                ],
+                correct: 0,
+                explanation: "Same interface roles devices connection directly parameters configuration swaps transmit pins (1 & 2) to receive pins (3 & 6) using a <strong>Crossover Cable</strong>. Analogy: <strong>Direct Phone Call (mouthpiece to earpiece)</strong>."
+            },
+            {
+                id: 16,
+                day: 2,
+                q: "Modern Cisco devices on physical ports dynamically auto-sense pin settings. If you connect a straight-through cable between same devices, this capability automatically swaps Tx/Rx pins. What is the name of this dynamic sensing system feature?",
+                options: [
+                    "Auto-Negotiation",
+                    "Dynamic Trunking (DTP)",
+                    "Auto-MDIX (Medium Dependent Interface Crossover)",
+                    "Speed Sense"
+                ],
+                correct: 2,
+                explanation: "<strong>Auto-MDIX</strong> features auto sense wiring connections errors parameters configuration mapping systems. Switch internally lines connections cross status coordinates swap check balance setup rules."
+            },
+            {
+                id: 17,
+                day: 2,
+                q: "Laser light source module and 9-micron core parameters design settings specifications structure logic high cost system distance levels upto 10 km to 40 km long range physical cable configuration type setups options?",
+                options: [
+                    "Multi-Mode Fiber (MMF)",
+                    "Single-Mode Fiber (SMF)",
+                    "STP Cat 6a",
+                    "Coaxial Cable Shielded"
+                ],
+                correct: 1,
+                explanation: "<strong>Single-Mode Fiber (SMF)</strong> supports laser light source tracking thin 9-micron core line paths. Multi bounce angles noise parameters are zero, enabling high distance ranges (10 km to 40 km+)."
+            },
+            {
+                id: 18,
+                day: 2,
+                q: "Light transmission system module setups cheaper LED light resource mapping broad 50-62.5 micron core design layout setups bounce patterns multiple angles travel path range up to 550m fiber-optic type option configurations?",
+                options: [
+                    "Single-Mode Fiber (SMF)",
+                    "Multi-Mode Fiber (MMF)",
+                    "UTP Cat 6",
+                    "SFP Interface"
+                ],
+                correct: 1,
+                explanation: "<strong>Multi-Mode Fiber (MMF)</strong> uses LED light, has a broad 50-62.5 micron core, and light bounces inside at multiple angles. Range is short (up to 550m), making MMF cheap."
+            },
+            {
+                id: 19,
+                day: 2,
+                q: "Cisco switch interface name parameters mapping options speeds configuration values FastEthernet 0/4 and GigabitEthernet 0/1 port configurations logical line capacity parameters definitions check options correct configurations speeds parameters correct values mappings represent option?",
+                options: [
+                    "FastEthernet = 10 Mbps; GigabitEthernet = 100 Mbps",
+                    "FastEthernet = 100 Mbps; GigabitEthernet = 1000 Mbps (1 Gbps)",
+                    "FastEthernet = 1000 Mbps; GigabitEthernet = 10 Gbps",
+                    "FastEthernet = 10 Mbps; GigabitEthernet = 10 Gbps"
+                ],
+                correct: 1,
+                explanation: "Cisco standard name speeds metrics: FastEthernet represents <strong>100 Mbps</strong> and GigabitEthernet port standard speed capability is <strong>1 Gbps (1000 Mbps)</strong>."
+            },
+            {
+                id: 20,
+                day: 2,
+                q: "SFP / SFP+ interface ports pluggable transceivers system characteristics details dynamic term 'Hot-Swappable' parameters correct definitions layouts active options?",
+                options: [
+                    "System transceivers can dynamically catch heat issues.",
+                    "SFP can be inserted or removed physically from active switches/routers panel without power down or reboots.",
+                    "SFP supports auto routing protocol setup configurations.",
+                    "Transceiver parameters only modify settings through CLI operations."
+                ],
+                correct: 1,
+                explanation: "<strong>Hot-Swappable</strong> modules can be physically plugged or unplugged while the network chassis is running (power on state), without needing system reboots."
+            },
+
+            // DAY 3 (OSI Model and TCP-IP Suite)
+            {
+                id: 21,
+                day: 3,
+                q: "Different brands systems devices interface software application systems protocols settings normal rules systems coordinate control options standard rules systems standard term definitions options?",
+                options: [
+                    "Algorithm",
+                    "Protocols",
+                    "Hardware standard",
+                    "Operating System interface"
+                ],
+                correct: 1,
+                explanation: "<strong>Protocols</strong> represent logical rules standards that define data transfer configurations to ensure different hardware brands communicate seamlessly."
+            },
+            {
+                id: 22,
+                day: 3,
+                q: "OSI Model complete bottom to top (Layer 1 to Layer 7) order checking sequential path correct naming mnemonic parameters sequence layouts correct options select options?",
+                options: [
+                    "All People Seem To Need Data Processing",
+                    "Please Do Not Throw Sausage Pizza Away",
+                    "Please Do Not Touch Switch Ports Directly",
+                    "All Physical Devices Need Transport Security"
+                ],
+                correct: 1,
+                explanation: "Bottom-to-top sequence (L1 to L7): <strong>Physical, Data Link, Network, Transport, Session, Presentation, Application</strong>. Mnemonic is <strong>P</strong>lease <strong>D</strong>o <strong>N</strong>ot <strong>T</strong>hrow <strong>S</strong>ausage <strong>P</strong>izza <strong>A</strong>way. (Top-to-bottom is 'All People Seem To Need Data Processing')."
+            },
+            {
+                id: 23,
+                day: 3,
+                q: "OSI Layer 4 (Transport Layer) interface parameters dynamic process breakdowns data segments PDU units, primary target reasons advantages setups configurations layouts logic correct option?",
+                options: [
+                    "Encryption logic standard operations path.",
+                    "If data transfer session crashes or bit corrupts during path lines transmissions, only that specific segment retransmits (L4 TCP) rather than re-downloading the entire big data file.",
+                    "To generate MAC addresses data lines verification.",
+                    "To bypass routing gateway interfaces nodes."
+                ],
+                correct: 1,
+                explanation: "Segmenting breaks large files into smaller units. If packet loss or bit errors happen, only the missing/corrupt <strong>Segment</strong> needs to be retransmitted, optimizing network utilization."
+            },
+            {
+                id: 24,
+                day: 3,
+                q: "Data formatting, dynamic compression, encryption and decryption SSL/TLS protocols, standard graphic representations, character encoding structures OSI model layer number execute layouts active criteria selection correct layer name?",
+                options: [
+                    "Layer 7 - Application Layer",
+                    "Layer 6 - Presentation Layer",
+                    "Layer 5 - Session Layer",
+                    "Layer 4 - Transport Layer"
+                ],
+                correct: 1,
+                explanation: "<strong>Layer 6 (Presentation Layer)</strong> handles data translation formatting, data compression, and security encryption/decryption (SSL/TLS)."
+            },
+            {
+                id: 25,
+                day: 3,
+                q: "Layer 3 (Network Layer) logical configurations IP routing configurations addresses details header data blocks PDU technical term name parameters select correct options?",
+                options: [
+                    "Segment",
+                    "Frame",
+                    "Packet",
+                    "Bits"
+                ],
+                correct: 2,
+                explanation: "Layer 3 (Network Layer) PDU is called a <strong>Packet</strong>, which contains Source and Destination IP Addresses."
+            },
+            {
+                id: 26,
+                day: 3,
+                q: "Error check calculations trailer sequences FCS mappings, physical ports MAC configurations structures OSI model layer number mapping parameters correct option select?",
+                options: [
+                    "Layer 1 - Physical Layer",
+                    "Layer 2 - Data Link Layer",
+                    "Layer 3 - Network Layer",
+                    "Layer 4 - Transport Layer"
+                ],
+                correct: 1,
+                explanation: "<strong>Layer 2 (Data Link Layer)</strong> adds headers (MAC addresses) and trailers (FCS) to check for transmission errors on physical links. PDU is called a <strong>Frame</strong>."
+            },
+            {
+                id: 27,
+                day: 3,
+                q: "Top-to-bottom transmission pathways, header inclusions, wrapping data blocks sequences system terms technical name represent option correct option select?",
+                options: [
+                    "Data De-encapsulation",
+                    "Data Encapsulation",
+                    "Serialization Process",
+                    "Route Path Calculation"
+                ],
+                correct: 1,
+                explanation: "<strong>Data Encapsulation</strong> wrapping process top-to-bottom. Analogy: <strong>Postal Mail Example</strong> (letters inside envelopes inside shipping boxes)."
+            },
+            {
+                id: 28,
+                day: 3,
+                q: "Incoming signal inputs bottom-to-top layers verification, stripping headers parameters, raw payload translation systems receiver system execution term name options select?",
+                options: [
+                    "De-encapsulation",
+                    "Encapsulation",
+                    "Decoding Frame",
+                    "Demultiplexing"
+                ],
+                correct: 0,
+                explanation: "<strong>De-encapsulation</strong> is the bottom-to-top process where headers are read and stripped away at each layer to access raw data. Analogy: <strong>Opening shipping box envelopes</strong>."
+            },
+            {
+                id: 29,
+                day: 3,
+                q: "Different nodes devices share identical layer logic controls logically communicate parameters (e.g. Host A Transport Layer TCP segment maps to Host B Transport Layer TCP parsing) interaction system name?",
+                options: [
+                    "Adjacent-Layer Interaction",
+                    "Same-Layer Interaction",
+                    "Peer-to-Peer local coding",
+                    "Dynamic Session Mapping"
+                ],
+                correct: 1,
+                explanation: "Logical communication between the same level layers of two distinct machines is called <strong>Same-Layer Interaction</strong>. Analogy: <strong>CEO-to-CEO Business Meetings</strong>."
+            },
+            {
+                id: 30,
+                day: 3,
+                q: "Single system architecture machine internal adjacent layers interaction parameters communications details (e.g. L3 network layer handing packet down to L2 data link for framing) system name?",
+                options: [
+                    "Same-Layer Interaction",
+                    "Adjacent-Layer Interaction",
+                    "Local Stack Loop",
+                    "Interface Port Binding"
+                ],
+                correct: 1,
+                explanation: "Local stack communication where an upper layer requests service from the layer directly below it is <strong>Adjacent-Layer Interaction</strong>. Analogy: <strong>CEO handing instructions to local Manager</strong>."
+            },
+
+            // DAY 5 (Ethernet LAN Switching - Part 1)
+            {
+                id: 31,
+                day: 5,
+                q: "Local LAN networks parameters, limited small physical geography (home/office), dynamic interfaces hosts routing boundaries boundaries local interactions analogy layouts representation society?",
+                options: [
+                    "Public Highway connection router",
+                    "Housing Society local inner roads connectivity",
+                    "International sorting center",
+                    "Wired electrical line networks"
+                ],
+                correct: 1,
+                explanation: "<strong>LAN (Local Area Network)</strong> is like a <strong>Housing Society</strong> where residents (hosts) move freely inside local roads (switches/MACs) without using the main highway (Router/Internet)."
+            },
+            {
+                id: 32,
+                day: 5,
+                q: "Ethernet Frame Header 7-byte alternating series sequence '10101010' patterns, receiver sync frequency clock speed system name parameter field name select options?",
+                options: [
+                    "Start Frame Delimiter (SFD)",
+                    "Preamble",
+                    "FCS CRC block",
+                    "EtherType Field"
+                ],
+                correct: 1,
+                explanation: "The <strong>Preamble (7 Bytes)</strong> is a series of alternating 1s and 0s that alerts the receiver network card to synchronize its clock. Analogy: <strong>VIP Entrance Drum-roll</strong>."
+            },
+            {
+                id: 33,
+                day: 5,
+                q: "Preamble ke theek baad `10101011` binary series code segment sequence, synchronization over parameter verification frame metadata details destination MAC start indication field name options select?",
+                options: [
+                    "FCS",
+                    "Start Frame Delimiter (SFD)",
+                    "EtherType",
+                    "UAA Serial"
+                ],
+                correct: 1,
+                explanation: "The <strong>SFD (Start Frame Delimiter - 1 Byte)</strong> ends with `11` to indicate synchronization is complete, and the next bytes will contain the Destination MAC. Analogy: <strong>Green Flag Drop</strong>."
+            },
+            {
+                id: 34,
+                day: 5,
+                q: "Ethernet Frame payload minimum data size rule (46 Bytes) parameters below sizes packets incoming data, extra trailing zero bits padding addition scientific logic parameter name options select?",
+                options: [
+                    "Fragmentation bits",
+                    "Padding",
+                    "CRC check bits",
+                    "SFD markers"
+                ],
+                correct: 1,
+                explanation: "Ethernet standard requires a <strong>minimum payload of 46 bytes</strong>. Zeros added to small packets are called <strong>Padding</strong>. Analogy: <strong>Amazon memory card shipping buffer packaging</strong>."
+            },
+            {
+                id: 35,
+                day: 5,
+                q: "Ethernet Frame FCS error check verification mismatch calculations drop frames switch operations, re-transmissions recovery logic controls execution standard behavior correct statement select?",
+                options: [
+                    "Switch requests sender nodes to retransmit frame instantly.",
+                    "Switch silently drops corrupted frame; Layer 2 has no error correction logic. Retransmission is L4 TCP role.",
+                    "Switch sends notification packets to gateway router node.",
+                    "Switch repairs corrupt frame bits instantly."
+                ],
+                correct: 1,
+                explanation: "Ethernet checks errors using FCS (Cyclic Redundancy Check) and <strong>silently drops corrupted frames</strong>. Error correction and retransmissions are handled by <strong>Layer 4 (TCP)</strong>. Analogy: <strong>Broken Box Security Seal</strong> rejection."
+            },
+            {
+                id: 36,
+                day: 5,
+                q: "MAC Address 48-bit hex configuration layout parameters OUI Organizationally Unique Identifier (manufacturer code) standard allocation range bits select options?",
+                options: [
+                    "First 12 bits",
+                    "First 24 bits (3 Bytes)",
+                    "Last 24 bits (3 Bytes)",
+                    "Last 16 bits"
+                ],
+                correct: 1,
+                explanation: "The first <strong>24 bits (3 Bytes)</strong> of a MAC address are the <strong>OUI (Organizationally Unique Identifier)</strong>, identifying the manufacturer. The last 24 bits are the UAA unique serial serial identifier. Analogy: <strong>VIN vehicle brand indicator code</strong>."
+            },
+            {
+                id: 37,
+                day: 5,
+                q: "Hexadecimal Base 16 notation representation character `C` decimal base 10 mapping value calculation layout option?",
+                options: [
+                    "10",
+                    "11",
+                    "12",
+                    "13"
+                ],
+                correct: 2,
+                explanation: "Hex base 16 symbols mapping: 0-9 values match normal numbers; <strong>A=10, B=11, C=12, D=13, E=14, F=15</strong>."
+            },
+            {
+                id: 38,
+                day: 5,
+                q: "Convert Decimal value **203** to Hexadecimal value (Base 16 standard format calculation steps) correct result options?",
+                options: [
+                    "0xBC",
+                    "0xCB",
+                    "0xDF",
+                    "0xB3"
+                ],
+                correct: 1,
+                explanation: "Division Method:<br><span class='math-box'>203 / 16 = 12 (Quotient = C), Remainder = 11 (B)</span><br>Reading remainders bottom-to-top gives <strong>0xCB</strong>."
+            },
+            {
+                id: 39,
+                day: 5,
+                q: "Convert Hexadecimal value **2F** to Decimal system base 10 value calculation step correct result option select?",
+                options: [
+                    "45",
+                    "47",
+                    "32",
+                    "51"
+                ],
+                correct: 1,
+                explanation: "Multiplier calculation: <br><span class='math-box'>2 * 16^1 + F (15) * 16^0 = 32 + 15 = 47</span>."
+            },
+            {
+                id: 40,
+                day: 5,
+                q: "Switch dynamic database MAC address learn (learning phase) tracking logic frame headers fields inspection criteria correct statement select?",
+                options: [
+                    "Switch inspects Destination MAC addresses dynamically.",
+                    "Switch inspects Source MAC addresses of incoming frames to map hosts to ports.",
+                    "Switch checks IP addresses mapping ARP queries.",
+                    "Switch checks EtherType protocols length."
+                ],
+                correct: 1,
+                explanation: "Switches learn MAC address mappings by inspecting the <strong>Source MAC Address</strong> of incoming frames. Analogy: <strong>Security guard recording visitor flats registry book</strong>."
+            },
+            {
+                id: 41,
+                day: 5,
+                q: "Switch incoming frame Destination MAC address CAM table parameters database checking rules not matched (Unknown Unicast frame) or Broadcast destination, switch forwarding execution logic standard correct select?",
+                options: [
+                    "Switch drops frame instantly.",
+                    "Switch sends frame out of all active port interfaces except incoming port (Flooding).",
+                    "Switch queries DHCP gateway interface.",
+                    "Switch targets unicast server router."
+                ],
+                correct: 1,
+                explanation: "If a destination MAC is not registered (Unknown Unicast) or is a broadcast, the switch <strong>floods</strong> it out of all ports except the incoming port. Analogy: <strong>Visitor guard megaphone announcements</strong>."
+            },
+
+            // ADDITIONAL 20 QUESTIONS (42 to 61)
+            {
+                id: 42,
+                day: 2,
+                q: "Cat 6 UTP copper cable standard ki maximum theoretical transmission limits standard speed 10 Gbps mode me run karte waqt maximum recommended length kitni hoti hai?",
+                options: [
+                    "100 meters",
+                    "55 meters",
+                    "10 meters",
+                    "250 meters"
+                ],
+                correct: 1,
+                explanation: "Cat 6 standard cable 10 Gbps speeds ko support karta hai but unki high attenuation noise control limit <strong>55 meters</strong> tak hi secure rehti hai. Agar full 100 meters length par 10 Gbps speed chahiye, toh <strong>Cat 6a (Augmented)</strong> cable standards select karne honge."
+            },
+            {
+                id: 43,
+                day: 2,
+                q: "Standard RJ45 Connector wiring configuration T568B color coding scheme ke according Pin 1 aur Pin 2 par kaun sa wire color dynamic format mapping check standard rules select options?",
+                options: [
+                    "Green-White (Pin 1) & Green (Pin 2)",
+                    "Orange-White (Pin 1) & Orange (Pin 2)",
+                    "Blue-White (Pin 1) & Blue (Pin 2)",
+                    "Brown-White (Pin 1) & Brown (Pin 2)"
+                ],
+                correct: 1,
+                explanation: "Cabling standard <strong>T568B</strong> design starts with: <strong>Pin 1 = Orange-White</strong> and <strong>Pin 2 = Orange</strong>. Wahi T568A wiring sequence standard Green-White aur Green se start hota hai."
+            },
+            {
+                id: 44,
+                day: 2,
+                q: "Standard RJ45 Connector wiring configuration T568A color coding scheme ke according Pin 1 aur Pin 2 par kaun sa wire color dynamic format mapping select options?",
+                options: [
+                    "Orange-White (Pin 1) & Orange (Pin 2)",
+                    "Green-White (Pin 1) & Green (Pin 2)",
+                    "Blue-White (Pin 1) & Blue (Pin 2)",
+                    "Brown-White (Pin 1) & Brown (Pin 2)"
+                ],
+                correct: 1,
+                explanation: "Cabling standard <strong>T568A</strong> design starts with: <strong>Pin 1 = Green-White</strong> and <strong>Pin 2 = Green</strong>. Pin swap controls check setups crossover connections coordinate swap logic."
+            },
+            {
+                id: 45,
+                day: 2,
+                q: "Ek Crossover Ethernet cable wiring design configurations me, End A ke standard pin configurations ko End B ke kin interface pins ke sath physical swapping (cross connection) di jati hai?",
+                options: [
+                    "Pins 1 & 2 swap with Pins 7 & 8",
+                    "Pins 1 & 2 swap with Pins 3 & 6",
+                    "Pins 3 & 4 swap with Pins 5 & 6",
+                    "Pins 1 & 2 swap with Pins 4 & 5"
+                ],
+                correct: 1,
+                explanation: "Crossover design parameters swap rules: <strong>Transmit pins (1 & 2) of End A connect directly to Receive pins (3 & 6) of End B</strong>. Wahi dynamic flow standard loops verify signals setups."
+            },
+            {
+                id: 46,
+                day: 5,
+                q: "Ethernet Frame Header ke 'Type/Length' 2-byte field block ke andar agar payload data structure encapsulated packet IPv4 address stack protocol represent kare, toh hex conversion code data kya display hoga?",
+                options: [
+                    "0x86DD",
+                    "0x0800",
+                    "0x0600",
+                    "0x0806"
+                ],
+                correct: 1,
+                explanation: "Type/Length field standard checks rules: IPv4 payload indication standard hexadecimal value hex code <strong>0x0800</strong> use karta hai. Dynamic labels parameters routers/switches read stack parameters."
+            },
+            {
+                id: 47,
+                day: 5,
+                q: "Ethernet Frame Header ke 'Type/Length' 2-byte field block ke andar agar payload data structure encapsulated packet IPv6 address stack protocol represent kare, toh hex conversion code data kya display hoga?",
+                options: [
+                    "0x0800",
+                    "0x86DD",
+                    "0x0806",
+                    "0x8847"
+                ],
+                correct: 1,
+                explanation: "Type/Length field standard checks rules: IPv6 payload indication standard hexadecimal value hex code is <strong>0x86DD</strong>. Dynamic label reads identify correct Layer 3 engine processing."
+            },
+            {
+                id: 48,
+                day: 5,
+                q: "Ethernet Frame Trailer ke end par error check detection verification cyclic checksum codes FCS blocks ka structure length parameters byte standards me kitne size ka hota hai?",
+                options: [
+                    "2 Bytes (16 bits)",
+                    "4 Bytes (32 bits)",
+                    "6 Bytes (48 bits)",
+                    "8 Bytes (64 bits)"
+                ],
+                correct: 1,
+                explanation: "The <strong>FCS (Frame Check Sequence)</strong> in the Ethernet trailer is exactly <strong>4 Bytes (32 bits)</strong> in size, containing the CRC checksum value."
+            },
+            {
+                id: 49,
+                day: 5,
+                q: "Ethernet Frame Header structures start synchronization phase parameters Preamble aur SFD (Start Frame Delimiter) fields ke respective byte sizes sequential correct order parameter select option?",
+                options: [
+                    "Preamble = 8 Bytes, SFD = 2 Bytes",
+                    "Preamble = 7 Bytes, SFD = 1 Byte",
+                    "Preamble = 6 Bytes, SFD = 6 Bytes",
+                    "Preamble = 14 Bytes, SFD = 4 Bytes"
+                ],
+                correct: 1,
+                explanation: "Synchronization bytes header parameters: <strong>Preamble is 7 Bytes</strong> and <strong>SFD is 1 Byte</strong>, making a total of 8 bytes of physical sync alerts on cable lines."
+            },
+            {
+                id: 50,
+                day: 5,
+                q: "Physical address MAC (BIA) 48-bit address design parameters ke range divisions details OUI organization assignment code aur UAA serial assignment code bits check details represent options select?",
+                options: [
+                    "OUI = 16 bits; UAA = 16 bits",
+                    "OUI = 24 bits (3 Bytes); UAA = 24 bits (3 Bytes)",
+                    "OUI = 32 bits; UAA = 16 bits",
+                    "OUI = 12 bits; UAA = 36 bits"
+                ],
+                correct: 1,
+                explanation: "48-bit MAC address parameters: <strong>First 24 bits (3 Bytes) = OUI</strong> (assigned to manufacturing brand by IEEE); <strong>Remaining 24 bits (3 Bytes) = UAA</strong> (assigned uniquely as dynamic card serial by manufacturer)."
+            },
+            {
+                id: 51,
+                day: 5,
+                q: "Hexadecimal Base 16 notation characters representation code mapping me character 'A' binary conversion 4-bit nybble bits layout value correct match sequence options?",
+                options: [
+                    "1001",
+                    "1010",
+                    "1011",
+                    "1100"
+                ],
+                correct: 1,
+                explanation: "Hex character <strong>A</strong> equals decimal 10. Binary calculation: <span class='math-box'>10 = 8 + 2</span>, which translates to 4-bit binary format <strong>1010</strong>."
+            },
+            {
+                id: 52,
+                day: 5,
+                q: "Hexadecimal Base 16 notation characters representation code mapping me character 'F' binary conversion 4-bit nybble bits layout value correct match sequence options?",
+                options: [
+                    "1110",
+                    "1111",
+                    "1010",
+                    "1001"
+                ],
+                correct: 1,
+                explanation: "Hex character <strong>F</strong> equals decimal 15. Binary calculation: <span class='math-box'>15 = 8 + 4 + 2 + 1</span>, which translates to 4-bit binary format <strong>1111</strong>."
+            },
+            {
+                id: 53,
+                day: 3,
+                q: "OSI 7-layer Model specifications parameters me kaun si Layer dynamic user application endpoints connections sessions start, manage, coordinate aur close boundaries rules execute control options name?",
+                options: [
+                    "Layer 7 - Application Layer",
+                    "Layer 6 - Presentation Layer",
+                    "Layer 5 - Session Layer",
+                    "Layer 4 - Transport Layer"
+                ],
+                correct: 2,
+                explanation: "<strong>Layer 5 (Session Layer)</strong> ka primary responsibility dynamic networks sessions coordination control setup connections establish aur wrap/terminate setups process execute rules system support configurations hai."
+            },
+            {
+                id: 54,
+                day: 3,
+                q: "OSI model Layer 7 (Application Layer) standard interfaces user applications communication protocols setup details systems correct protocol bundle group select options?",
+                options: [
+                    "TCP, UDP, and SSL",
+                    "HTTP, HTTPS, DNS, FTP, and SMTP",
+                    "IPv4, IPv6, ICMP, and OSPF",
+                    "Ethernet, PPP, Frame Relay, and ARP"
+                ],
+                correct: 1,
+                explanation: "Layer 7 (Application Layer) operates standard end-user software interaction services: <strong>HTTP, HTTPS (Web), DNS (Names), FTP (Files), and SMTP (Mail)</strong>."
+            },
+            {
+                id: 55,
+                day: 3,
+                q: "OSI Transport Layer (Layer 4) me use hone wale TCP aur UDP protocols ke target difference features correct statement setup select option?",
+                options: [
+                    "TCP runs Layer 3 routers; UDP works on switches.",
+                    "TCP is reliable connection-oriented dynamic data flow validation; UDP is connectionless optimized high speed data transfer without confirmations.",
+                    "TCP uses MAC address mapping verification checks; UDP targets IPs.",
+                    "UDP headers size is bigger than TCP."
+                ],
+                correct: 1,
+                explanation: "L4 Protocols properties: <strong>TCP is connection-oriented</strong> (reliable, uses re-transmissions and sequence check mappings). <strong>UDP is connectionless</strong> (lightweight, optimized for real-time video/voice speed without confirmations)."
+            },
+            {
+                id: 56,
+                day: 2,
+                q: "Cisco switch interface config operations CLI commands me Auto-MDIX feature switch port interface lines par enable setup configure command option check select parameters?",
+                options: [
+                    "mdix enable",
+                    "mdix auto",
+                    "auto-mdix on",
+                    "cable-sense auto"
+                ],
+                correct: 1,
+                explanation: "Cisco CLI standard configuration syntax within interface mode to activate auto crossover detection is: <span class='math-box'>mdix auto</span>. Clear override commands write as <span class='math-box'>no mdix auto</span>."
+            },
+            {
+                id: 57,
+                day: 5,
+                q: "Ethernet standard specifications rules parameters me standard packet payload transmission size indicator dynamic range MTU (Maximum Transmission Unit) value specification layout standard value kya hai?",
+                options: [
+                    "64 Bytes",
+                    "1500 Bytes",
+                    "1518 Bytes",
+                    "9000 Bytes"
+                ],
+                correct: 1,
+                explanation: "Ethernet Frame standard <strong>MTU (Maximum Transmission Unit)</strong> payload limit is <strong>1500 Bytes</strong>. Payload range values 46 bytes to 1500 bytes scale configurations rules check dynamic parameters."
+            },
+            {
+                id: 58,
+                day: 5,
+                q: "Preamble aur SFD synchronization details ko chhod kar, ek physical Ethernet standard frame minimum required frame size byte parameters value parameters select options?",
+                options: [
+                    "46 Bytes",
+                    "64 Bytes",
+                    "1500 Bytes",
+                    "1518 Bytes"
+                ],
+                correct: 1,
+                explanation: "Excluding Preamble/SFD: Header (14 bytes) + Min Payload (46 bytes) + Trailer (4 bytes) = <strong>64 Bytes</strong>. Agar frame isse chhota milti hai, toh use <strong>Runt/Collision Fragment</strong> classify karke drop kiya jata hai."
+            },
+            {
+                id: 59,
+                day: 5,
+                q: "Preamble aur SFD synchronization details ko chhod kar, ek physical Ethernet standard frame maximum standard frame size limit byte parameters options select?",
+                options: [
+                    "1500 Bytes",
+                    "1518 Bytes",
+                    "1522 Bytes",
+                    "9000 Bytes"
+                ],
+                correct: 1,
+                explanation: "Excluding Preamble/SFD: Header (14 bytes) + Max MTU Payload (1500 bytes) + Trailer (4 bytes) = <strong>1518 Bytes</strong>. Isse heavy frames system switches standard jumbo/giant size tag checks apply dynamic."
+            },
+            {
+                id: 60,
+                day: 5,
+                q: "Convert Decimal base 10 value **47** to Hexadecimal Base 16 standard format conversion result select option?",
+                options: [
+                    "0x2A",
+                    "0x2F",
+                    "0xF2",
+                    "0x1F"
+                ],
+                correct: 1,
+                explanation: "Calculation steps: <span class='math-box'>47 / 16 = 2 (Quotient = 2), Remainder = 15 (Hex code F)</span>. Combining bottom-to-top results in <strong>0x2F</strong>."
+            },
+            {
+                id: 61,
+                day: 5,
+                q: "Convert Decimal value **185** to Hexadecimal Base 16 format conversion result calculation select option?",
+                options: [
+                    "0xCB",
+                    "0xB9",
+                    "0x9B",
+                    "0xA9"
+                ],
+                correct: 1,
+                explanation: "Binary bridge shortcut: 185 binary is `10111001`. <br>Left Nybble `1011` = 11 (B). <br>Right Nybble `1001` = 9 (9). <br>Result is <strong>0xB9</strong>."
+            },
+
+            // 20 MORE QUESTIONS (62 to 81)
+            {
+                id: 62,
+                day: 1,
+                q: "Kaun sa intermediate network security device local network ko alag-alag collision domains me divide karta hai aur MAC address ke basis par data packets forward karta hai?",
+                options: [
+                    "Network Hub",
+                    "Network Switch",
+                    "Network Router",
+                    "Wireless Access Point"
+                ],
+                correct: 1,
+                explanation: "<strong>Switch (Layer 2)</strong> har interface port ke liye ek dedicated collision domain banata hai aur standard Destination MAC check karke frames forward karta hai."
+            },
+            {
+                id: 63,
+                day: 1,
+                q: "Cisco Packet Tracer simulation environment interface me, interface connections par standard physical connection link light 🔴 **Red** hone ka kya technical indicator code represent karta hai?",
+                options: [
+                    "Port is in STP block state.",
+                    "Link setup physically active hai par traffic block hai.",
+                    "Physical link connectivity administratively down hai, disconnect hai ya loop check control block.",
+                    "IP Address configuration clash error status."
+                ],
+                correct: 2,
+                explanation: "🔴 <strong>Red Link Light</strong> indicate karti hai ki link completely down hai (Physical disconnect hai ya interface administrative shutdown `shutdown` state me hai)."
+            },
+            {
+                id: 64,
+                day: 2,
+                q: "Agar aap network line par ek complete **12 Megabytes (12 MB)** size ki file transfer kar rahe hain, toh dynamic conversions rules ke according actual data transfer calculations bit scales me kitne **Megabits** represent karegi?",
+                options: [
+                    "12 Megabits",
+                    "96 Megabits",
+                    "1.5 Megabits",
+                    "120 Megabits"
+                ],
+                correct: 1,
+                explanation: "Byte block calculation: <span class='math-box'>1 Byte = 8 bits</span>. <br>12 Megabytes (MB) file transport lines par: <span class='math-box'>12 * 8 = 96 Megabits (Mb)</span> data packets send karegi."
+            },
+            {
+                id: 65,
+                day: 2,
+                q: "Kaun sa twisted pair category standard copper UTP cable parameters complete 100 meters distance range par full 10 Gbps speeds bandwidth transfer rate ko support criteria follow karega?",
+                options: [
+                    "Cat 5e",
+                    "Cat 6",
+                    "Cat 6a (Augmented)",
+                    "Cat 3"
+                ],
+                correct: 2,
+                explanation: "<strong>Cat 6a (Augmented)</strong> is specifically standard design jo full <strong>100 meters range par 10 Gbps speed</strong> support karta hai. Jabki regular Cat 6 cable 10 Gbps speed sirf up to 55m distance tak hi de sakta hai."
+            },
+            {
+                id: 66,
+                day: 2,
+                q: "RJ45 Connector color standards T568B configuration wiring rules sequence me Pin 3 aur Pin 6 pins coordinates par respective wire color standard select correct option?",
+                options: [
+                    "Green-White (Pin 3) & Green (Pin 6)",
+                    "Orange-White (Pin 3) & Orange (Pin 6)",
+                    "Blue-White (Pin 3) & Blue (Pin 6)",
+                    "Brown-White (Pin 3) & Brown (Pin 6)"
+                ],
+                correct: 0,
+                explanation: "In standard <strong>T568B</strong> design: Pin 3 is mapped as <strong>Green-White</strong> and Pin 6 is mapped as <strong>Green</strong>. Wahi T568A standard me Orange-White aur Orange pairs swapping run standard apply."
+            },
+            {
+                id: 67,
+                day: 2,
+                q: "RJ45 Connector color standards T568A configuration wiring rules sequence me Pin 3 aur Pin 6 pins coordinates par respective wire color standard select correct option?",
+                options: [
+                    "Green-White (Pin 3) & Green (Pin 6)",
+                    "Orange-White (Pin 3) & Orange (Pin 6)",
+                    "Blue-White (Pin 3) & Blue (Pin 6)",
+                    "Brown-White (Pin 3) & Brown (Pin 6)"
+                ],
+                correct: 1,
+                explanation: "In standard <strong>T568A</strong> design: Pin 3 is mapped as <strong>Orange-White</strong> and Pin 6 is mapped as <strong>Orange</strong>."
+            },
+            {
+                id: 68,
+                day: 2,
+                q: "Cisco switch models interface details me physical port named 'TenGigabitEthernet 0/1' and 'GigabitEthernet 0/1' interfaces speeds capability standard me correct differences metrics select options?",
+                options: [
+                    "TenGigabitEthernet = 1000 Mbps; GigabitEthernet = 100 Mbps",
+                    "TenGigabitEthernet = 10 Gbps (10,000 Mbps); GigabitEthernet = 1 Gbps (1,000 Mbps)",
+                    "TenGigabitEthernet = 100 Gbps; GigabitEthernet = 10 Gbps",
+                    "TenGigabitEthernet = 10 Mbps; GigabitEthernet = 1 Gbps"
+                ],
+                correct: 1,
+                explanation: "Speed metrics mapping: <strong>TenGigabitEthernet = 10 Gbps</strong> (which is 10,000 Mbps). GigabitEthernet represents 1 Gbps (1,000 Mbps). Yani TenGig interface 10 times speed capacity run karta hai."
+            },
+            {
+                id: 69,
+                day: 2,
+                q: "Single-Mode Fiber (SMF) optic cable strand standard physical glass core thickness parameter aur light transmission path properties select correct statement?",
+                options: [
+                    "50 microns core; multiple reflection light paths bouncing signals.",
+                    "9 microns core size; single straight laser path direct transmission line.",
+                    "62.5 microns core; laser light bounce dynamic.",
+                    "100 microns core; hybrid optic wave paths."
+                ],
+                correct: 1,
+                explanation: "<strong>Single-Mode Fiber (SMF)</strong> core represents extremely thin glass strand (approx <strong>9 microns</strong>) that allows laser lights signal paths to travel straight line without bounce angles. Long distances support."
+            },
+            {
+                id: 70,
+                day: 2,
+                q: "Multi-Mode Fiber (MMF) optic cable strand standard physical glass core thickness parameter range select correct options?",
+                options: [
+                    "9 microns",
+                    "50 to 62.5 microns",
+                    "100 microns",
+                    "8.3 microns"
+                ],
+                correct: 1,
+                explanation: "<strong>Multi-Mode Fiber (MMF)</strong> has a larger glass core width parameter (approx <strong>50 to 62.5 microns</strong>) which allows cheaper LED lights bounces signal configurations."
+            },
+            {
+                id: 71,
+                day: 3,
+                q: "OSI 7-layer Model specifications guidelines parameters me kaun si Layer incoming/outgoing standard data syntax, dynamic formatting transformations translations common format codes coordinate krti hai?",
+                options: [
+                    "Layer 7 - Application Layer",
+                    "Layer 6 - Presentation Layer",
+                    "Layer 5 - Session Layer",
+                    "Layer 4 - Transport Layer"
+                ],
+                correct: 1,
+                explanation: "Data compression formatting, syntax translations, characters formatting, and encryption/decryption are standard duties of <strong>Layer 6 (Presentation Layer)</strong>."
+            },
+            {
+                id: 72,
+                day: 3,
+                q: "OSI model structural layers standard me Physical Layer (Layer 1) standard data block PDU technical name parameters correct option select?",
+                options: [
+                    "Frame",
+                    "Segment",
+                    "Packet",
+                    "Bits"
+                ],
+                correct: 3,
+                explanation: "Layer 1 (Physical Layer) operates electrical cables signal transitions. Is scale mapping unit standard protocol data unit (PDU) is <strong>Bits</strong>."
+            },
+            {
+                id: 73,
+                day: 3,
+                q: "OSI Layer 4 (Transport Layer) protocols me UDP (User Datagram Protocol) features characteristics correct parameter statement select?",
+                options: [
+                    "UDP connection-oriented reliable packets transfer checker.",
+                    "UDP is connectionless fast speed transmission checks protocol, which does not check packets receipt delivery confirmations or retransmission rules.",
+                    "UDP works on Layer 3 network path determination logic.",
+                    "UDP header size values is heavier than TCP codes."
+                ],
+                correct: 1,
+                explanation: "<strong>UDP is connectionless</strong>, designed for speed (realtime video/audio). Ye delivery confirm, error correction, ya sequence order restore calculations handle nahi karta."
+            },
+            {
+                id: 74,
+                day: 3,
+                q: "Network Layer PDU Packet jab local systems par next bottom Data Link Layer to physical Layer transmit details process me hand down hota hai, tab us PDU structure me encapsulation me kaun se components wrap hote hain?",
+                options: [
+                    "Packet is serialized directly to cable bits.",
+                    "Packet starts to wrap with a Layer 2 Header (MAC addresses) and Layer 2 Trailer (FCS) to form a Frame.",
+                    "Packet strips source IP addresses header block details.",
+                    "Packet wraps with SSL/TLS encryption tokens only."
+                ],
+                correct: 1,
+                explanation: "Data Link Layer (Layer 2) packet ke upar dynamic boundary add karti hai: <strong>Header (MAC details)</strong> in front and <strong>Trailer (FCS code)</strong> at the tail end to form a complete <strong>Frame</strong>."
+            },
+            {
+                id: 75,
+                day: 5,
+                q: "Ethernet Frame structures me Payload segment block (L3 IP Packet data block area) maximum standard payload limit (MTU) kitne bytes parameters scale par map hota hai?",
+                options: [
+                    "46 Bytes",
+                    "1500 Bytes",
+                    "1518 Bytes",
+                    "64 Bytes"
+                ],
+                correct: 1,
+                explanation: "Ethernet standard MTU payload block maximum size limit is <strong>1500 Bytes</strong>. Is range limits parameters standard IP stack parameters boundaries verify configurations."
+            },
+            {
+                id: 76,
+                day: 5,
+                q: "Switches operations me jab incoming frame destination MAC database CAM table me already registered found mapped mil jaye (Known Unicast frame), tab switch forwarding logic dynamic kaun sa decision leti hai?",
+                options: [
+                    "Switch floods frame out of all ports except source.",
+                    "Switch unicasts frame directly out of ONLY that specific target mapped port interface.",
+                    "Switch drops frame instantly to protect loops.",
+                    "Switch redirects frame to router gateway port interface."
+                ],
+                correct: 1,
+                explanation: "Known Unicast frame parameters target decision: <strong>Switch forwards frame ONLY through the mapped physical port</strong>. Flooding action block checks skip."
+            },
+            {
+                id: 77,
+                day: 5,
+                q: "MAC Address (BIA) 48-bit layout structures me manufacturer brand code signature register settings representation kaun sa parameters scale map represent select options?",
+                options: [
+                    "OUI (Organizationally Unique Identifier) - First 24 bits (3 Bytes)",
+                    "UAA (Universally Administered Address) - Last 24 bits (3 Bytes)",
+                    "MAC Header identification signature - First 16 bits",
+                    "BIA checksum calculations range - Last 12 bits"
+                ],
+                correct: 0,
+                explanation: "MAC parameters brand identity structure: <strong>First 24 bits represent OUI</strong> (Organizationally Unique Identifier), assigned directly by IEEE to distinct manufacturers (Intel, Cisco, Realtek, etc.)."
+            },
+            {
+                id: 78,
+                day: 5,
+                q: "MAC Address (BIA) 48-bit layout structures me unique device serial number code parameter mapping representation kaun sa parameters scale select options?",
+                options: [
+                    "OUI",
+                    "UAA (Universally Administered Address) - Last 24 bits (3 Bytes)",
+                    "MAC Trailer CRC",
+                    "BIA signature block"
+                ],
+                correct: 1,
+                explanation: "MAC parameters serial unique address signature: <strong>Last 24 bits represent UAA</strong> (Universally Administered Address), assigned uniquely as card serial by manufacturer."
+            },
+            {
+                id: 79,
+                day: 5,
+                q: "Hexadecimal Base 16 notation representation character `F` integer representation standard decimal base 10 value mapping calculations parameters correct option select?",
+                options: [
+                    "10",
+                    "15",
+                    "16",
+                    "12"
+                ],
+                correct: 1,
+                explanation: "Hex base 16 characters symbols values mappings standard criteria: <strong>A=10, B=11, C=12, D=13, E=14, F=15</strong>."
+            },
+            {
+                id: 80,
+                day: 5,
+                q: "Convert Hexadecimal value **FF** to Decimal system base 10 value calculation step correct result option select?",
+                options: [
+                    "250",
+                    "255",
+                    "128",
+                    "256"
+                ],
+                correct: 1,
+                explanation: "Positional powers calculation steps: <br><span class='math-box'>F (15) * 16^1 + F (15) * 16^0 = 240 + 15 = 255</span>."
+            },
+            {
+                id: 81,
+                day: 5,
+                q: "Layer 2 Switch dynamic database logic building me, switch table records data fill updates operations correct statement parameters setup select?",
+                options: [
+                    "Switch maps Destination MAC address to outgoing interfaces.",
+                    "Switch inspects incoming frame Source MAC address to map hosts to physical ports dynamically.",
+                    "Switch records IP address mapping ARP broadcasts configurations.",
+                    "Switch maps routing table metrics parameters."
+                ],
+                correct: 1,
+                explanation: "Switches dynamically build tables by recording <strong>Source MAC address</strong> mapping physical port maps for any incoming frame lines connections."
+            }
+        ];
+
+        let currentMode = '';
+        let currentQuestions = [];
+        let currentIndex = 0;
+        let score = 0;
+        let selectedOption = null;
+        let isAnswered = false;
+        let startTime = null;
+        let timerInterval = null;
+        let timeLimit = 15 * 60; // 15 minutes in seconds
+        let secondsElapsed = 0;
+        let userAnswers = []; // tracks user selections for final review
+
+        function selectMode(mode) {
+            currentMode = mode;
+            if (mode === 'practice') {
+                document.getElementById('day-selector-container').style.display = 'block';
+            } else if (mode === 'mock') {
+                document.getElementById('day-selector-container').style.display = 'none';
+                startMockExam();
+            }
+        }
+
+        function startPractice(day) {
+            if (day === 'all') {
+                // Shuffle and pick 20 questions
+                currentQuestions = [...questions].sort(() => 0.5 - Math.random()).slice(0, 20);
+            } else {
+                currentQuestions = questions.filter(q => q.day === day);
+                // Shuffle practice set
+                currentQuestions.sort(() => 0.5 - Math.random());
+            }
+            
+            if (currentQuestions.length === 0) return;
+            
+            currentMode = 'practice';
+            initQuizGame();
+        }
+
+        function startMockExam() {
+            // Pick 20 random questions from all days
+            currentQuestions = [...questions].sort(() => 0.5 - Math.random()).slice(0, 20);
+            currentMode = 'mock';
+            initQuizGame();
+        }
+
+        function initQuizGame() {
+            currentIndex = 0;
+            score = 0;
+            secondsElapsed = 0;
+            userAnswers = [];
+            
+            // Switch screens
+            document.getElementById('screen-dashboard').classList.remove('active');
+            document.getElementById('screen-results').classList.remove('active');
+            document.getElementById('screen-quiz').classList.add('active');
+            
+            document.getElementById('quiz-mode-label').textContent = currentMode.toUpperCase() + " MODE";
+            
+            if (currentMode === 'mock') {
+                document.getElementById('quiz-timer').style.display = 'flex';
+                startTimer();
+            } else {
+                document.getElementById('quiz-timer').style.display = 'none';
+                clearInterval(timerInterval);
+            }
+            
+            startTime = new Date();
+            loadQuestion();
+        }
+
+        function startTimer() {
+            clearInterval(timerInterval);
+            updateTimerDisplay();
+            timerInterval = setInterval(() => {
+                secondsElapsed++;
+                updateTimerDisplay();
+                if (secondsElapsed >= timeLimit) {
+                    clearInterval(timerInterval);
+                    finishQuiz();
+                }
+            }, 1000);
+        }
+
+        function updateTimerDisplay() {
+            const timeLeft = Math.max(0, timeLimit - secondsElapsed);
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = timeLeft % 60;
+            document.getElementById('quiz-timer').textContent = `⏱️ ${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+        }
+
+        function loadQuestion() {
+            isAnswered = false;
+            selectedOption = null;
+            
+            const qData = currentQuestions[currentIndex];
+            
+            // Update counts & progress bar
+            document.getElementById('question-index-badge').textContent = `Question ${currentIndex + 1}/${currentQuestions.length}`;
+            const progressPercent = (currentIndex / currentQuestions.length) * 100;
+            document.getElementById('quiz-progress').style.width = `${progressPercent}%`;
+            
+            // Set text
+            document.getElementById('q-text').innerHTML = qData.q;
+            
+            // Generate options
+            const optionsBox = document.getElementById('options-box');
+            optionsBox.innerHTML = '';
+            
+            qData.options.forEach((opt, idx) => {
+                const button = document.createElement('button');
+                button.className = 'option-btn';
+                button.setAttribute('onclick', `selectOption(${idx})`);
+                
+                const letter = String.fromCharCode(65 + idx); // A, B, C, D
+                button.innerHTML = `
+                    <span class="option-letter">${letter}</span>
+                    <span>${opt}</span>
+                `;
+                optionsBox.appendChild(button);
+            });
+            
+            // Reset next button & explanation box
+            const nextBtn = document.getElementById('next-btn');
+            nextBtn.classList.add('disabled');
+            nextBtn.disabled = true;
+            nextBtn.textContent = currentIndex === currentQuestions.length - 1 ? "Finish Test 🏁" : "Next Question ➡️";
+            
+            document.getElementById('explanation-box').style.display = 'none';
+        }
+
+        function selectOption(index) {
+            if (isAnswered) return;
+            
+            const qData = currentQuestions[currentIndex];
+            const optionButtons = document.querySelectorAll('.option-btn');
+            
+            selectedOption = index;
+            
+            if (currentMode === 'practice') {
+                isAnswered = true;
+                
+                // Show feedback instantly
+                optionButtons.forEach((btn, idx) => {
+                    btn.classList.add('disabled');
+                    if (idx === qData.correct) {
+                        btn.classList.add('correct');
+                    } else if (idx === selectedOption) {
+                        btn.classList.add('incorrect');
+                    }
+                });
+                
+                // Update score
+                if (selectedOption === qData.correct) {
+                    score++;
+                }
+                
+                // Record answer
+                userAnswers.push({
+                    questionId: qData.id,
+                    userSelected: selectedOption,
+                    isCorrect: selectedOption === qData.correct
+                });
+                
+                // Show explanation
+                const explanationContent = document.getElementById('explanation-content');
+                explanationContent.innerHTML = qData.explanation;
+                document.getElementById('explanation-box').style.display = 'block';
+                
+                // Enable next button
+                const nextBtn = document.getElementById('next-btn');
+                nextBtn.classList.remove('disabled');
+                nextBtn.disabled = false;
+                
+            } else {
+                // Mock Exam Mode: Highlight choice only
+                optionButtons.forEach((btn, idx) => {
+                    if (idx === index) {
+                        btn.classList.add('selected');
+                    } else {
+                        btn.classList.remove('selected');
+                    }
+                });
+                
+                // Enable next button (User commits choice on Next)
+                const nextBtn = document.getElementById('next-btn');
+                nextBtn.classList.remove('disabled');
+                nextBtn.disabled = false;
+            }
+        }
+
+        function nextQuestion() {
+            const qData = currentQuestions[currentIndex];
+            
+            if (currentMode === 'mock') {
+                // Save mock answer mapping and score on dynamic next
+                if (selectedOption === qData.correct) {
+                    score++;
+                }
+                userAnswers.push({
+                    questionId: qData.id,
+                    userSelected: selectedOption,
+                    isCorrect: selectedOption === qData.correct
+                });
+            }
+            
+            if (currentIndex < currentQuestions.length - 1) {
+                currentIndex++;
+                loadQuestion();
+            } else {
+                finishQuiz();
+            }
+        }
+
+        function finishQuiz() {
+            clearInterval(timerInterval);
+            
+            // Swap screens
+            document.getElementById('screen-quiz').classList.remove('active');
+            document.getElementById('screen-results').classList.add('active');
+            
+            // Calculate final percentage score
+            const percent = Math.round((score / currentQuestions.length) * 100);
+            document.getElementById('result-score-percent').textContent = `${percent}%`;
+            
+            // Colors based on score
+            const scoreCircle = document.querySelector('.score-circle');
+            if (percent >= 80) {
+                scoreCircle.style.borderColor = 'var(--success)';
+                document.getElementById('result-score-percent').style.color = 'var(--success)';
+                document.getElementById('result-feedback-text').innerHTML = "🌟 <strong>Shaandar Performance!</strong> Aapke concepts bilkul clear hain. Cisco Packet Tracer labs aur theory solid chal rahi hai. Maintain this streak!";
+            } else if (percent >= 50) {
+                scoreCircle.style.borderColor = 'var(--warning)';
+                document.getElementById('result-score-percent').style.color = 'var(--warning)';
+                document.getElementById('result-feedback-text').innerHTML = "⚡ <strong>Achhi Koshish!</strong> Aapne lagbhag adhe se zyada questions sahi kiye hain. Kuch minor details (jaise cabling categories aur encapsulation steps) par revision ki zaroorat hai. Read notes once more.";
+            } else {
+                scoreCircle.style.borderColor = 'var(--danger)';
+                document.getElementById('result-score-percent').style.color = 'var(--danger)';
+                document.getElementById('result-feedback-text').innerHTML = "❌ <strong>Revision Required!</strong> Score weak hai. Concepts clear nahi hue hain, specifically Ethernet framing standards aur binary-hex conversions ko dobara dekhein.";
+            }
+            
+            // Set Stats
+            document.getElementById('stat-total').textContent = currentQuestions.length;
+            document.getElementById('stat-correct').textContent = score;
+            
+            // Time formatting
+            let durationSeconds = secondsElapsed;
+            if (currentMode === 'practice') {
+                const endTime = new Date();
+                durationSeconds = Math.round((endTime - startTime) / 1000);
+            }
+            const mins = Math.floor(durationSeconds / 60);
+            const secs = durationSeconds % 60;
+            document.getElementById('stat-time').textContent = `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+            
+            // Build Review list
+            buildReviewList();
+        }
+
+        function buildReviewList() {
+            const container = document.getElementById('review-container');
+            container.innerHTML = '<div class="review-title">🔍 Detailed Questions Review (Concept Checklist)</div>';
+            
+            userAnswers.forEach((ans, index) => {
+                const qData = questions.find(q => q.id === ans.questionId);
+                const item = document.createElement('div');
+                item.className = `review-item ${ans.isCorrect ? 'correct-review' : 'incorrect-review'}`;
+                
+                const userChoiceText = ans.userSelected !== null ? qData.options[ans.userSelected] : "Not Answered";
+                const correctChoiceText = qData.options[qData.correct];
+                
+                item.innerHTML = `
+                    <div class="review-q">Q${index + 1}: ${qData.q}</div>
+                    <div class="review-ans-row">
+                        <div class="review-ans">
+                            <span class="badge ${ans.isCorrect ? 'correct-badge' : 'user-badge'}">Your Answer</span>
+                            <span>${userChoiceText}</span>
+                        </div>
+                        ${!ans.isCorrect ? `
+                        <div class="review-ans">
+                            <span class="badge correct-badge">Correct Answer</span>
+                            <span>${correctChoiceText}</span>
+                        </div>
+                        ` : ''}
+                    </div>
+                    <div class="explanation-box" style="display: block; margin-top: 1rem;">
+                        <div class="explanation-title" style="color: var(--accent-purple);">💡 Explanation Details:</div>
+                        <div class="explanation-text">${qData.explanation}</div>
+                    </div>
+                `;
+                container.appendChild(item);
+            });
+        }
+
+        function exitQuiz() {
+            clearInterval(timerInterval);
+            document.getElementById('screen-quiz').classList.remove('active');
+            document.getElementById('screen-results').classList.remove('active');
+            document.getElementById('screen-dashboard').classList.add('active');
+        }
+
+        function restartQuiz() {
+            initQuizGame();
+        }
+    </script>
+</body>
+</html>
