@@ -95,3 +95,22 @@ Metasploit mein hazaron exploits hain. Sahi exploit dhundne ke liye `search` com
   msf6 > search smb rank:excellent
   ```
   *(Rank: excellent ka matlab hai ki yeh exploit target system ko crash nahi karega aur 99% reliable hai).*
+
+---
+
+## 6. Practice Exercises & Questions
+
+Apne Kali Linux terminal aur `msfconsole` ka use karke in questions ko solve karo aur check karo ki concepts clear hain ya nahi:
+
+1. **Exercise 1 (Search Filters):**
+   `msfconsole` ke andar jaakar ek aisa command search chalao jo sirf **Linux platform** ke exploits dhunde jinka rank **excellent** ho. Aapne kya search query chalayi aur kitne results mile?
+
+2. **Exercise 2 (CVE Analysis):**
+   Vulnerability `CVE-2020-0601` ke liye Metasploit mein exploit search karo. Yeh kis service ya system se related hai?
+
+3. **Exercise 3 (Directory Check):**
+   Apne Kali Linux terminal (not msfconsole) par command chala kar check karo ki `/usr/share/metasploit-framework/modules/exploits/` ke andar kaun-kaun se operating systems ke folders hain (jaise windows, linux, android). List ke screenshot ya names batayein.
+
+4. **Exercise 4 (Help Command):**
+   `msfconsole` ke andar `help search` run karke check karo ki aur kaun-kaun se search keywords (jaise author, platform) available hain jinse hum query narrow-down kar sakte hain.
+
