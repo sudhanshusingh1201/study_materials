@@ -1,4 +1,4 @@
-# Topic 38 - Metasploit Framework & Database Setup
+# Topic 01 - Metasploit Framework & Database Setup
 
 Metasploit is one of the most powerful and widely used penetration testing frameworks in the cybersecurity industry. It is designed to find, exploit, and validate security vulnerabilities.
 
