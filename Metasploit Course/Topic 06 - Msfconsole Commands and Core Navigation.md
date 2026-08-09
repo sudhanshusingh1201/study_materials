@@ -77,10 +77,30 @@ Kyunki humara database connected hai (`db_status`), hum in commands ka use scan 
 
 ---
 
-## 5. Practice Exercises
+## 5. Practice Exercises for Console Mastery
 
-1. **Exercise 1 (Session Backgrounding):**
-   `exploit/multi/handler` ko use karke check karein aur use background job (`-j`) ki tarah start karein. `jobs` command ka output verify karke batayein.
+Perform these tasks on your Kali Linux terminal and `msfconsole` to gain muscle memory and command proficiency:
 
-2. **Exercise 2 (Database Filtering):**
-   Apne lab target scan hone ke baad msfconsole mein sirf port 21 (FTP) aur port 22 (SSH) ke services filter karke dekhne ka command likhein.
+1. **Exercise 1 (Job Management):**  
+   `exploit/multi/handler` module ko loaded karein. Is listener ko background job (`-j`) ki tarah port `5555` aur generic reverse shell payload ke saath run karein. `jobs -l` command chala kar confirmation output screenshot/text verify karein.
+
+2. **Exercise 2 (Database Service Queries):**  
+   Database commands ka use karke sirf target ports `22` (SSH) aur `445` (SMB) ke hosts aur details filter karne ki command likhein.
+
+3. **Exercise 3 (Module Info Inspection):**  
+   Exploit module `exploit/windows/smb/ms17_010_eternalblue` load karein aur `info` run karein. Is exploit ki reliability (Rank) kya hai aur isme details mein kaun si dynamic dependency library ka mention kiya gaya hai?
+
+4. **Exercise 4 (Global Variable Propagation):**  
+   `setg LPORT 9999` chala kar use globally set karein. `use auxiliary/scanner/portscan/tcp` command se new category explore karein aur options check karein ki kya LPORT automatically update hua hai.
+
+5. **Exercise 5 (Interactive Session Control):**  
+   Maan lijiye aapke paas 3 active background sessions chal rahe hain. Session number `2` ke shell mein enter karne ke liye aur phir wahan se bina disconnect hue shell ko background bhejne ke liye commands ka sequence batayein.
+
+6. **Exercise 6 (Upgrading Sessions):**  
+   Session number `1` par chal rahe aam unix command shell ko Meterpreter shell ke roop mein upgrade/promote karne ka command verify karein.
+
+7. **Exercise 7 (Advanced Parameter View):**  
+   `use exploit/unix/ftp/vsftpd_234_backdoor` select karein. Is exploit ke underlying standard timeout configurations ko dekhne ke liye kis command ka use karenge?
+
+8. **Exercise 8 (Session Termination):**  
+   Kaam khatam hone par saare background running sessions ko ek baar mein terminate/kill karne ke liye kis command ka check chalate hain?
