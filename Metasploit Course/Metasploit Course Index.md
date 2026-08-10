@@ -36,6 +36,8 @@ Welcome to the **Metasploit Master Course** study guide. This index connects all
   * Network socket binding logic, BindFailed troubleshooting, and active port checks.
 * **[[Topic 15 - IP Parameters in Metasploit]]**
   * Practical logic comparing RHOSTS, LHOST, and SRVHOST configuration IPs.
+* **[[Topic 16 - Vulnerability Mapping in Metasploit]]**
+  * Concept of matching vulnerabilities, CVE mapping, and database search.
 
 ---
 *Note: Click on any topic above to directly open the study guide.*
