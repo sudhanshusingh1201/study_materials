@@ -32,6 +32,10 @@ Welcome to the **Metasploit Master Course** study guide. This index connects all
   * Loading by direct path, fast index numbers (`use 0`), and dynamic custom reloads.
 * **[[Topic 13 - Metasploit Workspaces]]**
   * Logical target partitioning, workspace commands, and scan database isolation.
+* **[[Topic 14 - Socket Binding and Network Listeners]]**
+  * Network socket binding logic, BindFailed troubleshooting, and active port checks.
+* **[[Topic 15 - IP Parameters in Metasploit]]**
+  * Practical logic comparing RHOSTS, LHOST, and SRVHOST configuration IPs.
 
 ---
 *Note: Click on any topic above to directly open the study guide.*
