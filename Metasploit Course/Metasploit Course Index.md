@@ -38,6 +38,8 @@ Welcome to the **Metasploit Master Course** study guide. This index connects all
   * Practical logic comparing RHOSTS, LHOST, and SRVHOST configuration IPs.
 * **[[Topic 16 - Vulnerability Mapping in Metasploit]]**
   * Concept of matching vulnerabilities, CVE mapping, and database search.
+* **[[Topic 17 - Complete Metasploit Exploitation Lifecycle]]**
+  * Step-by-step methodology from scanning to exploitation verification.
 
 ---
 *Note: Click on any topic above to directly open the study guide.*
