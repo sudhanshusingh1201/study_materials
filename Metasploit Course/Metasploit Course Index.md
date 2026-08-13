@@ -44,6 +44,8 @@ Welcome to the **Metasploit Master Course** study guide. This index connects all
   * Concept of Singles vs Staged payloads and Metasploit naming conventions.
 * **[[Topic 19 - Msfvenom Basics, Payload Formats & Multi-Handler]]**
   * Practical creation of backdoors and multi/handler listener configurations.
+* **[[Topic 20 - Msfvenom Encoders, Bad Characters & Evasion Basics]]**
+  * Concept of encoders, identifying bad characters, and command obfuscation logic.
 
 ---
 *Note: Click on any topic above to directly open the study guide.*
