@@ -40,6 +40,8 @@ Welcome to the **Metasploit Master Course** study guide. This index connects all
   * Concept of matching vulnerabilities, CVE mapping, and database search.
 * **[[Topic 17 - Complete Metasploit Exploitation Lifecycle]]**
   * Step-by-step methodology from scanning to exploitation verification.
+* **[[Topic 18 - Payload Types (Single, Stager, Stage)]]**
+  * Concept of Singles vs Staged payloads and Metasploit naming conventions.
 
 ---
 *Note: Click on any topic above to directly open the study guide.*
