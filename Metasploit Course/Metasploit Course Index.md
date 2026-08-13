@@ -42,6 +42,8 @@ Welcome to the **Metasploit Master Course** study guide. This index connects all
   * Step-by-step methodology from scanning to exploitation verification.
 * **[[Topic 18 - Payload Types (Single, Stager, Stage)]]**
   * Concept of Singles vs Staged payloads and Metasploit naming conventions.
+* **[[Topic 19 - Msfvenom Basics, Payload Formats & Multi-Handler]]**
+  * Practical creation of backdoors and multi/handler listener configurations.
 
 ---
 *Note: Click on any topic above to directly open the study guide.*
