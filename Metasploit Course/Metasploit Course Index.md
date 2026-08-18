@@ -50,6 +50,8 @@ Welcome to the **Metasploit Master Course** study guide. This index connects all
   * Core concepts of scanners, admin, and fuzzer modules with database integration.
 * **[[Topic 22 - Metasploit Encoders & Obfuscation Techniques]]**
   * Concept of encoders, polymorphic engines, and practical obfuscation loops.
+* **[[Topic 23 - Metasploit NOP Generators & NOP Sleds]]**
+  * Practical creation of NOP sleds, memory alignment logic, and signatures bypass.
 
 ---
 *Note: Click on any topic above to directly open the study guide.*
