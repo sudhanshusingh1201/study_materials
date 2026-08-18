@@ -52,6 +52,8 @@ Welcome to the **Metasploit Master Course** study guide. This index connects all
   * Concept of encoders, polymorphic engines, and practical obfuscation loops.
 * **[[Topic 23 - Metasploit NOP Generators & NOP Sleds]]**
   * Practical creation of NOP sleds, memory alignment logic, and signatures bypass.
+* **[[Topic 24 - Metasploit Post-Exploitation Modules]]**
+  * Concept of Post-Exploitation modules, session handling, and target VM enumeration.
 
 ---
 *Note: Click on any topic above to directly open the study guide.*
