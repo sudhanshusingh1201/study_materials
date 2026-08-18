@@ -48,6 +48,8 @@ Welcome to the **Metasploit Master Course** study guide. This index connects all
   * Concept of encoders, identifying bad characters, and command obfuscation logic.
 * **[[Topic 21 - Metasploit Auxiliary Modules Deep Dive]]**
   * Core concepts of scanners, admin, and fuzzer modules with database integration.
+* **[[Topic 22 - Metasploit Encoders & Obfuscation Techniques]]**
+  * Concept of encoders, polymorphic engines, and practical obfuscation loops.
 
 ---
 *Note: Click on any topic above to directly open the study guide.*
