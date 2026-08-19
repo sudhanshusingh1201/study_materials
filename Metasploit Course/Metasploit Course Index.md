@@ -54,6 +54,8 @@ Welcome to the **Metasploit Master Course** study guide. This index connects all
   * Practical creation of NOP sleds, memory alignment logic, and signatures bypass.
 * **[[Topic 24 - Metasploit Post-Exploitation Modules]]**
   * Concept of Post-Exploitation modules, session handling, and target VM enumeration.
+* **[[Topic 25 - Metasploit Basic Exploitation Lifecycle]]**
+  * Five core phases of Metasploit exploitation workflow, commands parameters, and verification.
 
 ---
 *Note: Click on any topic above to directly open the study guide.*
