@@ -1,0 +1,18 @@
+{
+  "showNodeLabels": true,
+  "showLabelsOnHoverOnly": true,
+  "useKeyboardControls": true,
+  "rotateSpeed": 1.0,
+  "keyboardMoveSpeed": 2.0,
+  "linkThickness": 2.5,
+  "useWasmPhysics": true,
+  "repelForce": 12.0,
+  "centerForce": 0.25,
+  "linkForce": 0.06,
+  "zoomOnClick": true,
+  "labelDistance": 120,
+  "labelTextSize": 4.5,
+  "labelBackgroundOpacity": 0.8,
+  "labelTextColorDark": "#00ff66",
+  "labelBackgroundColor": "#050806"
+}

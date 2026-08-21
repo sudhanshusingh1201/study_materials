@@ -1,0 +1,572 @@
+/* ========================================================================= */
+/* MATRIX TERMINAL / CYBER HACKER HUD THEME                                   */
+/* ========================================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;700&family=Share+Tech+Mono&family=VT323&display=swap');
+
+body.theme-dark {
+  /* Fonts */
+  --font-interface: 'Share Tech Mono', 'Fira Code', monospace !important;
+  --font-text: 'Fira Code', monospace !important;
+  --font-monospace: 'Fira Code', monospace !important;
+  
+  /* Matrix Dark Terminal Palette */
+  --background-primary: #050806 !important; /* Deep Greenish-Black */
+  --background-primary-alt: #0a0f0c !important;
+  --background-secondary: #030504 !important;
+  --background-secondary-alt: #050806 !important;
+  
+  /* Glowing Text States */
+  --text-normal: #a5d6a7 !important; /* Cyber phosphor green-gray */
+  --text-muted: #4e735a !important; /* Dim green */
+  
+  /* Hacker Terminal Green Accents */
+  --interactive-accent: #00ff66 !important; /* Toxic Matrix Green */
+  --interactive-accent-hover: #39ff14 !important;
+  
+  /* Terminal Warning Alerts & Links */
+  --text-link: #00ff66 !important;
+  --text-link-hover: #ffffff !important;
+  --text-error: #ff3333 !important; /* Intrusion alert red */
+  
+  /* Scrollbar & Borders */
+  --scrollbar-bg: #030504 !important;
+  --scrollbar-thumb: rgba(0, 255, 102, 0.2) !important;
+  --border-color: rgba(0, 255, 102, 0.15) !important;
+
+  /* Enhanced Graph View Variables */
+  --graph-node: #00ff66 !important; /* Phosphor Green Nodes */
+  --graph-node-unresolved: #ffaa00 !important; /* Alert Amber Nodes */
+  --graph-node-focused: #ffffff !important; /* Highlighted Active Nodes */
+  --graph-line: rgba(0, 255, 102, 0.15) !important; /* Dim Vector Connections */
+  --graph-line-focused: rgba(0, 255, 102, 0.75) !important; /* Glowing Laser Vector Path */
+  --graph-text: #00ff66 !important; /* Monospace Node Names */
+
+  /* Animated Starfield Galaxy Background */
+  background-image: 
+    radial-gradient(1px 1px at 20px 30px, rgba(0, 255, 102, 0.6), rgba(0,0,0,0)),
+    radial-gradient(1.5px 1.5px at 75px 130px, #ffffff, rgba(0,0,0,0)),
+    radial-gradient(1px 1px at 120px 60px, rgba(57, 255, 20, 0.5), rgba(0,0,0,0)),
+    radial-gradient(2px 2px at 180px 170px, #00ff66, rgba(0,0,0,0)),
+    radial-gradient(1px 1px at 240px 90px, #ffffff, rgba(0,0,0,0)) !important;
+  background-size: 300px 300px !important;
+  animation: galaxy-drift 120s linear infinite !important;
+}
+
+@keyframes galaxy-drift {
+  0% { background-position: 0 0; }
+  100% { background-position: 300px 600px; }
+}
+
+/* Global Transition & Selection */
+* {
+  transition: background-color 0.2s cubic-bezier(0.2, 0.8, 0.2, 1), 
+              border-color 0.2s cubic-bezier(0.2, 0.8, 0.2, 1), 
+              box-shadow 0.2s ease !important;
+}
+
+::selection {
+  background: rgba(0, 255, 102, 0.3) !important;
+  color: #ffffff !important;
+  text-shadow: 0 0 10px #00ff66 !important;
+}
+
+/* Translucent Terminal Glassmorphism Sidebar */
+.workspace-split.mod-left-split, .workspace-ribbon.mod-left {
+  background-color: rgba(3, 5, 4, 0.92) !important;
+  backdrop-filter: blur(10px) !important;
+  border-right: 1px solid rgba(0, 255, 102, 0.25) !important;
+  box-shadow: 2px 0 15px rgba(0, 255, 102, 0.05) !important;
+}
+
+.workspace-leaf {
+  background-color: #050806 !important;
+  border: 1px solid rgba(0, 255, 102, 0.08) !important;
+}
+
+/* Terminal Title / Tab Active styling */
+.tab-header-item.is-active {
+  border-bottom: 2px solid #00ff66 !important;
+  color: #00ff66 !important;
+  text-shadow: 0 0 8px rgba(0, 255, 102, 0.6) !important;
+}
+
+/* ========================================================================= */
+/* COMMAND LINE HEADER PREFIXES & ANIMATIONS                                 */
+/* ========================================================================= */
+
+@keyframes terminal-blink {
+  0%, 100% { opacity: 0; }
+  50% { opacity: 1; }
+}
+
+@keyframes scanline-anim {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100%); }
+}
+
+/* Inline Title Styling */
+.inline-title {
+  color: #00ff66 !important;
+  font-family: 'Share Tech Mono', monospace !important;
+  text-shadow: 0 0 12px rgba(0, 255, 102, 0.6) !important;
+  border-bottom: 2px dashed rgba(0, 255, 102, 0.3) !important;
+  padding-bottom: 12px !important;
+  font-weight: 700 !important;
+}
+
+/* Headings with Shell prompt styling */
+.markdown-preview-view h1::before, .markdown-rendered h1::before, .cm-header-1::before {
+  content: "root@system:~# " !important;
+  color: #00ff66 !important;
+  opacity: 0.8;
+  font-family: 'VT323', monospace !important;
+  font-size: 1.1em;
+}
+
+.markdown-preview-view h1, .markdown-rendered h1, .cm-header-1 {
+  color: #00ff66 !important;
+  font-family: 'Share Tech Mono', monospace !important;
+  font-weight: 700 !important;
+  text-shadow: 0 0 8px rgba(0, 255, 102, 0.5) !important;
+  border-bottom: 1px dashed rgba(0, 255, 102, 0.3) !important;
+  padding-bottom: 8px !important;
+  margin-top: 1.5em !important;
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  border-right: 3px solid #00ff66;
+  animation: terminal-blink 0.8s step-end infinite !important;
+}
+
+.markdown-preview-view h2::before, .markdown-rendered h2::before, .cm-header-2::before {
+  content: "$ [exec] " !important;
+  color: #00ff66 !important;
+  opacity: 0.7;
+}
+
+.markdown-preview-view h2, .markdown-rendered h2, .cm-header-2 {
+  color: #ffffff !important;
+  font-family: 'Share Tech Mono', monospace !important;
+  text-shadow: 0 0 5px rgba(255, 255, 255, 0.3) !important;
+  border-bottom: none !important;
+}
+
+.markdown-preview-view h3::before, .markdown-rendered h3::before, .cm-header-3::before {
+  content: ">> " !important;
+  color: #00ff66 !important;
+  opacity: 0.7;
+}
+
+.markdown-preview-view h3, .markdown-rendered h3, .cm-header-3 {
+  color: #88aa99 !important;
+  font-family: 'Share Tech Mono', monospace !important;
+}
+
+/* Glowing bold elements */
+strong, b {
+  color: #39ff14 !important;
+  text-shadow: 0 0 6px rgba(57, 255, 20, 0.4) !important;
+}
+
+/* Hacker-style glitched links */
+a, .cm-link {
+  color: #00ff66 !important;
+  text-decoration: underline dotted rgba(0, 255, 102, 0.3) !important;
+}
+
+a:hover, .cm-link:hover {
+  color: #ffffff !important;
+  text-shadow: 0 0 8px #00ff66 !important;
+  animation: active-glitch 0.3s steps(2, start) infinite !important;
+}
+
+/* ========================================================================= */
+/* GREEN PHOSPHOR CRT TERMINAL CODEBLOCKS                                    */
+/* ========================================================================= */
+
+code {
+  color: #00ff66 !important;
+  background-color: #0c120e !important;
+  padding: 3px 6px !important;
+  border-radius: 3px !important;
+  border: 1px solid rgba(0, 255, 102, 0.2) !important;
+  font-family: 'Fira Code', monospace !important;
+  font-size: 0.9em !important;
+  text-shadow: 0 0 5px rgba(0, 255, 102, 0.4) !important;
+}
+
+/* Terminal Panel Container with CRT Scanline Overlays */
+pre {
+  position: relative;
+  overflow: hidden;
+}
+
+pre::before {
+  content: " ";
+  display: block;
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+  z-index: 2;
+  background-size: 100% 4px, 6px 100%;
+  pointer-events: none;
+}
+
+pre::after {
+  content: " ";
+  display: block;
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
+  background: linear-gradient(0deg, rgba(0, 255, 102, 0.1) 0%, rgba(0, 255, 102, 0) 10%);
+  opacity: 0.15;
+  z-index: 2;
+  pointer-events: none;
+  animation: scanline-anim 8s linear infinite;
+}
+
+pre code {
+  color: #00ff66 !important;
+  background-color: #060a08 !important;
+  border: 1px solid rgba(0, 255, 102, 0.3) !important;
+  display: block !important;
+  padding: 16px !important;
+  border-radius: 6px !important;
+  box-shadow: inset 0 0 15px rgba(0, 255, 102, 0.1) !important;
+  text-shadow: 0 0 3px rgba(0, 255, 102, 0.5) !important;
+  font-size: 0.95em !important;
+}
+
+/* ========================================================================= */
+/* DIRECTORY TREE INTERFACE & SELECTION (WITH MOTION & GLITCH)               */
+/* ========================================================================= */
+
+@keyframes cyber-scan {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes active-glitch {
+  0%, 94%, 100% {
+    transform: skew(0deg);
+    text-shadow: 0 0 8px rgba(57, 255, 20, 0.8);
+  }
+  95% {
+    transform: skew(3deg);
+    text-shadow: -2px 0 rgba(0,255,102,0.8), 2px 0 rgba(255,0,102,0.8);
+  }
+  97% {
+    transform: skew(-3deg);
+    text-shadow: 2px 0 rgba(0,255,102,0.8), -2px 0 rgba(255,0,102,0.8);
+  }
+  99% {
+    transform: skew(0deg);
+  }
+}
+
+/* Staggered load animation when files appear */
+@keyframes cyber-reveal {
+  0% {
+    opacity: 0;
+    transform: translateX(-18px) scaleX(0.95);
+    filter: blur(2px);
+    text-shadow: 0 0 10px #00ff66;
+    color: #00ff66;
+  }
+  15% {
+    opacity: 0.7;
+    filter: blur(1px);
+  }
+  60% {
+    opacity: 0.95;
+    transform: translateX(1px);
+    filter: blur(0px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0) scaleX(1);
+    color: #a5d6a7;
+  }
+}
+
+.nav-file, .nav-folder {
+  opacity: 0;
+  animation: cyber-reveal 0.4s cubic-bezier(0.2, 0.8, 0.2, 1) forwards !important;
+}
+
+/* Staggered Delay for loading list items */
+.nav-file:nth-child(1), .nav-folder:nth-child(1) { animation-delay: 0.03s !important; }
+.nav-file:nth-child(2), .nav-folder:nth-child(2) { animation-delay: 0.06s !important; }
+.nav-file:nth-child(3), .nav-folder:nth-child(3) { animation-delay: 0.09s !important; }
+.nav-file:nth-child(4), .nav-folder:nth-child(4) { animation-delay: 0.12s !important; }
+.nav-file:nth-child(5), .nav-folder:nth-child(5) { animation-delay: 0.15s !important; }
+.nav-file:nth-child(6), .nav-folder:nth-child(6) { animation-delay: 0.18s !important; }
+.nav-file:nth-child(7), .nav-folder:nth-child(7) { animation-delay: 0.21s !important; }
+.nav-file:nth-child(8), .nav-folder:nth-child(8) { animation-delay: 0.24s !important; }
+.nav-file:nth-child(9), .nav-folder:nth-child(9) { animation-delay: 0.27s !important; }
+.nav-file:nth-child(10), .nav-folder:nth-child(10) { animation-delay: 0.30s !important; }
+.nav-file:nth-child(n+11), .nav-folder:nth-child(n+11) { animation-delay: 0.33s !important; }
+
+/* Cyber Directory Tree Connecting Lines */
+.nav-folder-children {
+  border-left: 1px dashed rgba(0, 255, 102, 0.25) !important;
+  margin-left: 10px !important;
+  padding-left: 8px !important;
+}
+
+.nav-file-title, .nav-folder-title {
+  position: relative;
+  overflow: hidden;
+  font-family: 'Share Tech Mono', monospace !important;
+  font-size: 0.95em !important;
+  color: #a5d6a7 !important;
+  border-left: 2px solid transparent !important;
+  padding: 4px 6px !important;
+  transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
+}
+
+/* Laser scanning motion on hover */
+.nav-file-title:hover, .nav-folder-title:hover {
+  background: linear-gradient(90deg, rgba(0, 255, 102, 0) 0%, rgba(0, 255, 102, 0.15) 50%, rgba(0, 255, 102, 0) 100%) !important;
+  background-size: 200% 100% !important;
+  animation: cyber-scan 1.2s infinite linear !important;
+  color: #00ff66 !important;
+  border-left: 2px solid #00ff66 !important;
+  text-shadow: 0 0 8px rgba(0, 255, 102, 0.8) !important;
+  padding-left: 12px !important; /* Motion slide-in */
+}
+
+/* Adding command arrow pointer on hover */
+.nav-file-title:hover::before, .nav-folder-title:hover::before {
+  content: "> " !important;
+  color: #00ff66 !important;
+  font-weight: bold;
+}
+
+/* Glitching solid cursor look for active files */
+.nav-file-title.is-active, .nav-folder-title.is-active {
+  background-color: rgba(0, 255, 102, 0.12) !important;
+  color: #39ff14 !important;
+  border-left: 3px solid #39ff14 !important;
+  text-shadow: 0 0 10px rgba(57, 255, 20, 0.8) !important;
+  animation: active-glitch 2.5s infinite alternate !important;
+  padding-left: 12px !important;
+}
+
+.nav-file-title.is-active::before, .nav-folder-title.is-active::before {
+  content: "█ " !important; /* Solid block cursor prefix */
+  color: #39ff14 !important;
+  animation: terminal-blink 0.8s step-end infinite !important;
+}
+
+/* ========================================================================= */
+/* CHECKBOX / TASK COMPLETED Terminal Hack                                  */
+/* ========================================================================= */
+
+.task-list-item-checkbox {
+  appearance: none;
+  -webkit-appearance: none;
+  background-color: #050806 !important;
+  border: 1px solid #00ff66 !important;
+  box-shadow: 0 0 5px rgba(0, 255, 102, 0.3) !important;
+  width: 14px;
+  height: 14px;
+  border-radius: 2px;
+  display: inline-block;
+  position: relative;
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+.task-list-item-checkbox:checked {
+  background-color: #00ff66 !important;
+}
+
+.task-list-item-checkbox:checked::after {
+  content: "✔";
+  color: #050806 !important;
+  font-size: 11px;
+  position: absolute;
+  top: -1px;
+  left: 2px;
+  font-weight: bold;
+}
+
+/* Strike-through for completed hacker tasks */
+.markdown-preview-view ul.task-list-done, .markdown-rendered ul.task-list-done {
+  text-decoration: line-through;
+  color: rgba(0, 255, 102, 0.35) !important;
+}
+
+/* ========================================================================= */
+/* HACKER SYSTEM GRAPH VIEW & CONTROL ENHANCEMENT                           */
+/* ========================================================================= */
+
+/* Normal node: Phosphor Green Target */
+.theme-dark .graph-view.color-fill {
+  color: #00ff66 !important;
+}
+
+/* Highlighted node: Matrix White Glow */
+.theme-dark .graph-view.color-fill-highlight {
+  color: #ffffff !important;
+}
+
+/* Connections: Very Dim Green matrix stream */
+.theme-dark .graph-view.color-line {
+  color: rgba(0, 255, 102, 0.12) !important;
+}
+
+/* Selected paths: Laser Green */
+.theme-dark .graph-view.color-line-highlight {
+  color: rgba(0, 255, 102, 0.75) !important;
+}
+
+/* Unresolved nodes: Cyber yellow warning */
+.theme-dark .graph-view.color-fill-unresolved {
+  color: #ffcc00 !important;
+}
+
+/* Graph Text: Monospace font */
+.theme-dark .graph-view.color-text {
+  color: #00ff66 !important;
+  font-family: 'Share Tech Mono', monospace !important;
+}
+
+/* Tags: Cyan Cybernetic system */
+.theme-dark .graph-view.color-fill-tag {
+  color: #00e5ff !important;
+}
+
+/* Custom Styled Graph Controls (Cyber HUD style) */
+.graph-controls {
+  background-color: rgba(5, 8, 6, 0.94) !important;
+  backdrop-filter: blur(12px) !important;
+  border: 1px solid rgba(0, 255, 102, 0.3) !important;
+  border-radius: 8px !important;
+  box-shadow: 0 0 25px rgba(0, 255, 102, 0.15) !important;
+  color: #a5d6a7 !important;
+  font-family: 'Share Tech Mono', monospace !important;
+}
+
+.graph-controls .setting-item {
+  border-bottom: 1px dashed rgba(0, 255, 102, 0.15) !important;
+  padding: 8px 0 !important;
+}
+
+.graph-controls .setting-item-name {
+  color: #00ff66 !important;
+  text-shadow: 0 0 5px rgba(0, 255, 102, 0.3) !important;
+}
+
+/* Sliders */
+.graph-controls input[type="range"] {
+  accent-color: #00ff66 !important;
+  height: 4px;
+}
+
+/* Toggles & Checkbox container in Graph settings */
+.checkbox-container {
+  background-color: rgba(0, 255, 102, 0.1) !important;
+  border: 1px solid rgba(0, 255, 102, 0.3) !important;
+  box-shadow: inset 0 0 5px rgba(0, 255, 102, 0.1) !important;
+}
+
+.checkbox-container.is-enabled {
+  background-color: #00ff66 !important;
+  box-shadow: 0 0 8px rgba(0, 255, 102, 0.5) !important;
+}
+
+/* Buttons in Graph View Panel */
+.graph-controls button, .graph-controls .button {
+  background-color: #0c120e !important;
+  border: 1px solid #00ff66 !important;
+  color: #00ff66 !important;
+  font-family: 'Share Tech Mono', monospace !important;
+  border-radius: 4px !important;
+  box-shadow: 0 0 5px rgba(0, 255, 102, 0.2) !important;
+}
+
+.graph-controls button:hover, .graph-controls .button:hover {
+  background-color: rgba(0, 255, 102, 0.2) !important;
+  box-shadow: 0 0 8px rgba(0, 255, 102, 0.4) !important;
+}
+
+/* Statusbar details */
+.status-bar {
+  background-color: #030504 !important;
+  border-top: 1px solid rgba(0, 255, 102, 0.15) !important;
+  color: #4e735a !important;
+  font-family: 'Share Tech Mono', monospace !important;
+}
+
+/* ========================================================================= */
+/* 3D GRAPH VIEW ENHANCED HUD THEME & ENTRY ANIMATION                       */
+/* ========================================================================= */
+
+@keyframes graph-3d-entrance {
+  0% {
+    opacity: 0;
+    transform: scale(0.3) rotate(-180deg);
+    filter: blur(25px) brightness(2.2);
+  }
+  65% {
+    opacity: 0.85;
+    transform: scale(1.05) rotate(10deg);
+    filter: blur(4px) brightness(1.2);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+    filter: blur(0) brightness(1);
+  }
+}
+
+/* Apply cosmic spin & reveal entry animation to 3D graph view container */
+.graph-3d-view-content {
+  animation: graph-3d-entrance 2.5s cubic-bezier(0.15, 0.85, 0.25, 1) forwards !important;
+}
+
+/* Hacker style 3D Graph Settings Panel */
+.graph-3d-settings-panel {
+  background-color: rgba(5, 8, 6, 0.95) !important;
+  backdrop-filter: blur(12px) !important;
+  border: 1px solid rgba(0, 255, 102, 0.35) !important;
+  border-radius: 8px !important;
+  box-shadow: 0 0 30px rgba(0, 255, 102, 0.25) !important;
+  color: #a5d6a7 !important;
+  font-family: 'Share Tech Mono', monospace !important;
+}
+
+.graph-3d-settings-panel .setting-item {
+  border-top: 1px dashed rgba(0, 255, 102, 0.2) !important;
+}
+
+.graph-3d-settings-panel .setting-item-name {
+  color: #00ff66 !important;
+  text-shadow: 0 0 5px rgba(0, 255, 102, 0.3) !important;
+}
+
+/* 3D Graph Toggle buttons */
+.graph-3d-settings-toggle, .graph-3d-reset-toggle {
+  background-color: #0c120e !important;
+  border: 1px solid rgba(0, 255, 102, 0.3) !important;
+  color: #00ff66 !important;
+  box-shadow: 0 0 8px rgba(0, 255, 102, 0.15) !important;
+  border-radius: 6px !important;
+}
+
+.graph-3d-settings-toggle:hover, .graph-3d-reset-toggle:hover {
+  background-color: rgba(0, 255, 102, 0.18) !important;
+  border-color: #00ff66 !important;
+  box-shadow: 0 0 12px rgba(0, 255, 102, 0.4) !important;
+}
+
+/* 3D Node Counter */
+.graph-3d-counter {
+  background-color: rgba(5, 8, 6, 0.9) !important;
+  border: 1px solid rgba(0, 255, 102, 0.25) !important;
+  color: #00ff66 !important;
+  font-family: 'Share Tech Mono', monospace !important;
+  box-shadow: 0 0 10px rgba(0, 255, 102, 0.1) !important;
+}
