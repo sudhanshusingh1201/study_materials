@@ -132,6 +132,7 @@ flowchart TD
     Mod3 --> T38["Topic 38: File Hierarchy (FHS)"]:::linux
     Mod3 --> T43["Topic 43: Users/Groups"]:::linux
     Mod3 --> T45["Topic 45: Inside Shell"]:::linux
+    Mod3 --> T48["Topic 48: System Admin"]:::linux
 
     %% Group 4: Essential Commands
     Mod4 --> T18["cd (Change Dir)"]:::command
@@ -213,6 +214,7 @@ Niche hamare course ke topics ki index list hai. Kisi bhi topic par click karke 
 - **Topic 45:** 🐚 [[Kali Linux Course/Topic 45 - Inside the Linux Shell (Builtins vs External, Shortcuts, Aliases, Environment Variables)|Linux Inside the Shell (Builtins vs External, Shortcuts, Aliases, Environment Variables)]]
 - **Topic 46:** 🌐 [[Kali Linux Course/Topic 46 - Linux Networking and Troubleshooting (ip, ss, dig, route, resolv-conf, hosts)|Linux Networking & Troubleshooting (ip, ss, dig, route, /etc/hosts)]]
 - **Topic 47:** 📝 [[Kali Linux Course/Topic 47 - Linux Terminal Editor vi (Modal Editing, Insert vs Command Mode, Navigation, Save-Quit)|Linux Terminal Editor: vi (Modal Editing, Command/Insert Modes, Save & Quit)]]
+- **Topic 48:** ⚙️ [[Kali Linux Course/Topic 48 - Linux System Administration and Process Management (ps, top, systemctl, df, free, kill)|Linux System Administration & Process Management (ps, top, systemctl, df, free, kill)]]
 
 ---
----
+
