@@ -41,6 +41,8 @@ flowchart LR
     end
 ```
 
+![EtherChannel Link Aggregation](../images/etherchannel_bundling.jpg)
+
 ### A. Key Advantages of EtherChannel:
 1.  **STP Bypass (No Blocked Ports):** STP pure Port-Channel group ko ek single logical interface ki tarah dekhta hai. Isliye individual physical links block nahi hote, aur saari link bandwidth ek sath use hoti hai.
 2.  **Bandwidth Aggregation:** Agar aapne 100 Mbps ke 4 links bundle kiye hain, toh aapka logical Port-Channel interface **400 Mbps** ki throughput provide karega.

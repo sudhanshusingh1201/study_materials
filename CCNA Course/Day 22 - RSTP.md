@@ -70,6 +70,8 @@ flowchart TD
     SWB -- "AP (Alternate - Blocked)" --- SWC
 ```
 
+![RSTP Link Redirection and Alternate Port](../images/rstp_convergence.jpg)
+
 1.  **Root Port (RP):** Same as classic STP. Root Bridge tak pahunchne ka sabse lowest path cost wala port (1 per non-root switch).
 2.  **Designated Port (DP):** Same as classic STP. Har segment par traffic forward karne wala primary port.
 3.  **Alternate Port (AP) (Naya Role):** 
