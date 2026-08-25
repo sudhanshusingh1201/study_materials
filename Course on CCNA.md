@@ -94,6 +94,9 @@ Niche aapki progress tracker index hai. Jis day ka note ban jayega, wo solid lin
 - **Day 28:** 🔌 [[CCNA Course/Day 28 - FHRP|First Hop Redundancy Protocols (FHRP)]]
 - **Day 29:** 🔌 [[CCNA Course/Day 29 - TCP and UDP|TCP & UDP]]
 
+### 🛠️ Module 4: IP Services & IPv6 (Days 30 - 38)
+- **Day 30:** 🔌 [[CCNA Course/Day 30 - IPv6 - Part 1|IPv6 - Part 1]]
+
 ---
 > [!TIP]
 > **Obsidian Graph Shortcut:** Obsidian mein local graph open karne ke liye sidebar check karein ya `Ctrl + G` press karein. Is index ke open hone par visual graph is central node (`Course on CCNA`) se connect hote huye nodes show karega.
