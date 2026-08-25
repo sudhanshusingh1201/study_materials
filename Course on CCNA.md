@@ -98,6 +98,7 @@ Niche aapki progress tracker index hai. Jis day ka note ban jayega, wo solid lin
 - **Day 30:** 🔌 [[CCNA Course/Day 30 - IPv6 - Part 1|IPv6 - Part 1]]
 - **Day 31:** 🔌 [[CCNA Course/Day 31 - IPv6 - Part 2|IPv6 - Part 2]]
 - **Day 32:** 🔌 [[CCNA Course/Day 32 - IPv6 - Part 3|IPv6 - Part 3]]
+- **Day 33:** 🔌 [[CCNA Course/Day 33 - Access Control Lists - Part 1|Access Control Lists (ACLs) - Part 1]]
 
 ---
 > [!TIP]
