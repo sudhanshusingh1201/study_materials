@@ -76,22 +76,21 @@ Niche aapki progress tracker index hai. Jis day ka note ban jayega, wo solid lin
 - **Day 14:** 🔌 [[CCNA Course/Day 14 - Subnetting - Part 2|Subnetting - Part 2]]
 - **Day 15:** 🔌 [[CCNA Course/Day 15 - Subnetting - Part 3|Subnetting - Part 3]]
 
-### 🔌 Module 2: LAN Switching & VLANs (Days 16 - 24)
+### 🔌 Module 2: LAN Switching & VLANs (Days 16 - 23)
 - **Day 16:** 🔌 [[CCNA Course/Day 16 - VLANs - Part 1|VLANs - Part 1]]
 - **Day 17:** 🔌 [[CCNA Course/Day 17 - VLANs - Part 2|VLANs - Part 2]]
 - **Day 18:** 🔌 [[CCNA Course/Day 18 - VLANs - Part 3|VLANs - Part 3]]
 - **Day 19:** 🔌 [[CCNA Course/Day 19 - DTP and VTP|DTP and VTP]]
 - **Day 20:** 🔌 [[CCNA Course/Day 20 - STP - Part 1|Spanning Tree Protocol - Part 1]]
 - **Day 21:** 🔌 [[CCNA Course/Day 21 - STP - Part 2|Spanning Tree Protocol - Part 2]]
-- **Day 22:** 🔌 [[CCNA Course/Day 22 - STP - Part 3|Spanning Tree Protocol - Part 3]]
-- **Day 23:** 🔌 [[CCNA Course/Day 23 - RSTP|Rapid STP (RSTP)]]
-- **Day 24:** 🔌 [[CCNA Course/Day 24 - EtherChannel|EtherChannel (LACP & PAgP)]]
+- **Day 22:** 🔌 [[CCNA Course/Day 22 - RSTP|Rapid STP (RSTP)]]
+- **Day 23:** 🔌 [[CCNA Course/Day 23 - EtherChannel|EtherChannel (LACP & PAgP)]]
 
-### 🛣️ Module 3: Routing & OSPF (Days 25 - 30)
-- **Day 25:** 🔌 [[CCNA Course/Day 25 - Dynamic Routing Concepts|Dynamic Routing Concepts]]
-- **Day 26:** 🔌 [[CCNA Course/Day 26 - OSPF - Part 1|OSPF - Part 1]]
-- **Day 27:** 🔌 [[CCNA Course/Day 27 - OSPF - Part 2|OSPF - Part 2]]
-- **Day 28:** 🔌 [[CCNA Course/Day 28 - OSPF - Part 3|OSPF - Part 3]]
+### 🛣️ Module 3: Routing & OSPF (Days 24 - 29)
+- **Day 24:** 🔌 [[CCNA Course/Day 24 - Dynamic Routing Concepts|Dynamic Routing Concepts]]
+- **Day 25:** 🔌 [[CCNA Course/Day 25 - OSPF - Part 1|OSPF - Part 1]]
+- **Day 26:** 🔌 [[CCNA Course/Day 26 - OSPF - Part 2|OSPF - Part 2]]
+- **Day 27:** 🔌 [[CCNA Course/Day 27 - OSPF - Part 3|OSPF - Part 3]]
 
 ---
 > [!TIP]
