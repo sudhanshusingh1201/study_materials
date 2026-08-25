@@ -92,6 +92,7 @@ Niche aapki progress tracker index hai. Jis day ka note ban jayega, wo solid lin
 - **Day 26:** 🔌 [[CCNA Course/Day 26 - OSPF - Part 2|OSPF - Part 2]]
 - **Day 27:** 🔌 [[CCNA Course/Day 27 - OSPF - Part 3|OSPF - Part 3]]
 - **Day 28:** 🔌 [[CCNA Course/Day 28 - FHRP|First Hop Redundancy Protocols (FHRP)]]
+- **Day 29:** 🔌 [[CCNA Course/Day 29 - TCP and UDP|TCP & UDP]]
 
 ---
 > [!TIP]
