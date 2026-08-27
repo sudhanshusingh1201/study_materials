@@ -128,6 +128,9 @@ Niche aapki progress tracker index hai. Jis day ka note ban jayega, wo solid lin
 - **Day 56:** 🔌 [[CCNA Course/Day 56 - Wireless Security|Wireless Security]]
 - **Day 57:** 🔌 [[CCNA Course/Day 57 - Wireless Configuration|Wireless Configuration]]
 
+### 🤖 Module 7: Network Automation & Programmability (Days 58 - 62)
+- **Day 58:** 🔌 [[CCNA Course/Day 58 - Intro to Network Automation|Introduction to Network Automation]]
+
 ---
 > [!TIP]
 > **Obsidian Graph Shortcut:** Obsidian mein local graph open karne ke liye sidebar check karein ya `Ctrl + G` press karein. Is index ke open hone par visual graph is central node (`Course on CCNA`) se connect hote huye nodes show karega.
