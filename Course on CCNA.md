@@ -100,6 +100,7 @@ Niche aapki progress tracker index hai. Jis day ka note ban jayega, wo solid lin
 - **Day 32:** 🔌 [[CCNA Course/Day 32 - IPv6 - Part 3|IPv6 - Part 3]]
 - **Day 33:** 🔌 [[CCNA Course/Day 33 - Access Control Lists - Part 1|Access Control Lists (ACLs) - Part 1]]
 - **Day 34:** 🔌 [[CCNA Course/Day 34 - Access Control Lists - Part 2|Access Control Lists (ACLs) - Part 2]]
+- **Day 35:** 🔌 [[CCNA Course/Day 35 - CDP and LLDP|CDP & LLDP]]
 
 ---
 > [!TIP]
