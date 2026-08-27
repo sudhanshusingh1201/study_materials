@@ -110,6 +110,7 @@ Niche aapki progress tracker index hai. Jis day ka note ban jayega, wo solid lin
 - **Day 40:** 🔌 [[CCNA Course/Day 40 - Syslog|Syslog]]
 - **Day 41:** 🔌 [[CCNA Course/Day 41 - SSH|Secure Shell (SSH)]]
 - **Day 42:** 🔌 [[CCNA Course/Day 42 - FTP and TFTP|FTP & TFTP]]
+- **Day 43:** 🔌 [[CCNA Course/Day 43 - NAT - Part 1|Network Address Translation (NAT) - Part 1]]
 
 ---
 > [!TIP]
