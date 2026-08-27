@@ -123,6 +123,7 @@ Niche aapki progress tracker index hai. Jis day ka note ban jayega, wo solid lin
 - **Day 51:** 🔌 [[CCNA Course/Day 51 - LAN Architectures|LAN Architectures]]
 - **Day 52:** 🔌 [[CCNA Course/Day 52 - WAN Architectures|WAN Architectures]]
 - **Day 53:** 🔌 [[CCNA Course/Day 53 - Virtualization and Cloud|Virtualization & Cloud]]
+- **Day 54:** 🔌 [[CCNA Course/Day 54 - Wireless Fundamentals|Wireless Fundamentals]]
 
 ---
 > [!TIP]
