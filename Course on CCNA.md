@@ -105,7 +105,7 @@ Niche aapki progress tracker index hai. Jis day ka note ban jayega, wo solid lin
 - **Day 37:** 🔌 [[CCNA Course/Day 37 - DNS|Domain Name System (DNS)]]
 - **Day 38:** 🔌 [[CCNA Course/Day 38 - DHCP|Dynamic Host Configuration Protocol (DHCP)]]
 
-### 🔒 Module 5: Security & Network Management (Days 39 - 48)
+### 🔒 Module 5: Security & Network Management (Days 39 - 50)
 - **Day 39:** 🔌 [[CCNA Course/Day 39 - SNMP|Simple Network Management Protocol (SNMP)]]
 - **Day 40:** 🔌 [[CCNA Course/Day 40 - Syslog|Syslog]]
 - **Day 41:** 🔌 [[CCNA Course/Day 41 - SSH|Secure Shell (SSH)]]
@@ -118,6 +118,9 @@ Niche aapki progress tracker index hai. Jis day ka note ban jayega, wo solid lin
 - **Day 48:** 🔌 [[CCNA Course/Day 48 - Port Security|Port Security]]
 - **Day 49:** 🔌 [[CCNA Course/Day 49 - DHCP Snooping|DHCP Snooping]]
 - **Day 50:** 🔌 [[CCNA Course/Day 50 - Dynamic ARP Inspection|Dynamic ARP Inspection (DAI)]]
+
+### 🏢 Module 6: Advanced Architectures & Wireless (Days 51 - 57)
+- **Day 51:** 🔌 [[CCNA Course/Day 51 - LAN Architectures|LAN Architectures]]
 
 ---
 > [!TIP]
