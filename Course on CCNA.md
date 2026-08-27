@@ -105,6 +105,9 @@ Niche aapki progress tracker index hai. Jis day ka note ban jayega, wo solid lin
 - **Day 37:** 🔌 [[CCNA Course/Day 37 - DNS|Domain Name System (DNS)]]
 - **Day 38:** 🔌 [[CCNA Course/Day 38 - DHCP|Dynamic Host Configuration Protocol (DHCP)]]
 
+### 🔒 Module 5: Security & Network Management (Days 39 - 48)
+- **Day 39:** 🔌 [[CCNA Course/Day 39 - SNMP|Simple Network Management Protocol (SNMP)]]
+
 ---
 > [!TIP]
 > **Obsidian Graph Shortcut:** Obsidian mein local graph open karne ke liye sidebar check karein ya `Ctrl + G` press karein. Is index ke open hone par visual graph is central node (`Course on CCNA`) se connect hote huye nodes show karega.
