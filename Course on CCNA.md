@@ -103,6 +103,7 @@ Niche aapki progress tracker index hai. Jis day ka note ban jayega, wo solid lin
 - **Day 35:** 🔌 [[CCNA Course/Day 35 - CDP and LLDP|CDP & LLDP]]
 - **Day 36:** 🔌 [[CCNA Course/Day 36 - NTP|Network Time Protocol (NTP)]]
 - **Day 37:** 🔌 [[CCNA Course/Day 37 - DNS|Domain Name System (DNS)]]
+- **Day 38:** 🔌 [[CCNA Course/Day 38 - DHCP|Dynamic Host Configuration Protocol (DHCP)]]
 
 ---
 > [!TIP]
