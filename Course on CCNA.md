@@ -109,6 +109,7 @@ Niche aapki progress tracker index hai. Jis day ka note ban jayega, wo solid lin
 - **Day 39:** 🔌 [[CCNA Course/Day 39 - SNMP|Simple Network Management Protocol (SNMP)]]
 - **Day 40:** 🔌 [[CCNA Course/Day 40 - Syslog|Syslog]]
 - **Day 41:** 🔌 [[CCNA Course/Day 41 - SSH|Secure Shell (SSH)]]
+- **Day 42:** 🔌 [[CCNA Course/Day 42 - FTP and TFTP|FTP & TFTP]]
 
 ---
 > [!TIP]
