@@ -116,6 +116,7 @@ Niche aapki progress tracker index hai. Jis day ka note ban jayega, wo solid lin
 - **Day 46:** 🔌 [[CCNA Course/Day 46 - QoS - Part 2|Quality of Service (QoS) - Part 2]]
 - **Day 47:** 🔌 [[CCNA Course/Day 47 - Security Fundamentals|Security Fundamentals]]
 - **Day 48:** 🔌 [[CCNA Course/Day 48 - Port Security|Port Security]]
+- **Day 49:** 🔌 [[CCNA Course/Day 49 - DHCP Snooping|DHCP Snooping]]
 
 ---
 > [!TIP]
