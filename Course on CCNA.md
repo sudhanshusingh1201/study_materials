@@ -126,6 +126,7 @@ Niche aapki progress tracker index hai. Jis day ka note ban jayega, wo solid lin
 - **Day 54:** 🔌 [[CCNA Course/Day 54 - Wireless Fundamentals|Wireless Fundamentals]]
 - **Day 55:** 🔌 [[CCNA Course/Day 55 - Wireless Architectures|Wireless Architectures]]
 - **Day 56:** 🔌 [[CCNA Course/Day 56 - Wireless Security|Wireless Security]]
+- **Day 57:** 🔌 [[CCNA Course/Day 57 - Wireless Configuration|Wireless Configuration]]
 
 ---
 > [!TIP]
