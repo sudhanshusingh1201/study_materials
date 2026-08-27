@@ -117,6 +117,7 @@ Niche aapki progress tracker index hai. Jis day ka note ban jayega, wo solid lin
 - **Day 47:** 🔌 [[CCNA Course/Day 47 - Security Fundamentals|Security Fundamentals]]
 - **Day 48:** 🔌 [[CCNA Course/Day 48 - Port Security|Port Security]]
 - **Day 49:** 🔌 [[CCNA Course/Day 49 - DHCP Snooping|DHCP Snooping]]
+- **Day 50:** 🔌 [[CCNA Course/Day 50 - Dynamic ARP Inspection|Dynamic ARP Inspection (DAI)]]
 
 ---
 > [!TIP]
