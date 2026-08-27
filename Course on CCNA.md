@@ -132,6 +132,7 @@ Niche aapki progress tracker index hai. Jis day ka note ban jayega, wo solid lin
 - **Day 58:** 🔌 [[CCNA Course/Day 58 - Intro to Network Automation|Introduction to Network Automation]]
 - **Day 59:** 🔌 [[CCNA Course/Day 59 - Data Serialization (JSON, XML, YAML)|Data Serialization (JSON, XML, YAML)]]
 - **Day 60:** 🔌 [[CCNA Course/Day 60 - REST APIs|REST APIs]]
+- **Day 61:** 🔌 [[CCNA Course/Day 61 - Software-Defined Networking|Software-Defined Networking (SDN)]]
 
 ---
 > [!TIP]
