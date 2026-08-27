@@ -113,6 +113,7 @@ Niche aapki progress tracker index hai. Jis day ka note ban jayega, wo solid lin
 - **Day 43:** 🔌 [[CCNA Course/Day 43 - NAT - Part 1|Network Address Translation (NAT) - Part 1]]
 - **Day 44:** 🔌 [[CCNA Course/Day 44 - NAT - Part 2|Network Address Translation (NAT) - Part 2]]
 - **Day 45:** 🔌 [[CCNA Course/Day 45 - QoS - Part 1|Quality of Service (QoS) - Part 1]]
+- **Day 46:** 🔌 [[CCNA Course/Day 46 - QoS - Part 2|Quality of Service (QoS) - Part 2]]
 
 ---
 > [!TIP]
