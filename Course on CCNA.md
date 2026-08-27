@@ -107,6 +107,7 @@ Niche aapki progress tracker index hai. Jis day ka note ban jayega, wo solid lin
 
 ### 🔒 Module 5: Security & Network Management (Days 39 - 48)
 - **Day 39:** 🔌 [[CCNA Course/Day 39 - SNMP|Simple Network Management Protocol (SNMP)]]
+- **Day 40:** 🔌 [[CCNA Course/Day 40 - Syslog|Syslog]]
 
 ---
 > [!TIP]
