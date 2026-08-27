@@ -130,6 +130,7 @@ Niche aapki progress tracker index hai. Jis day ka note ban jayega, wo solid lin
 
 ### 🤖 Module 7: Network Automation & Programmability (Days 58 - 62)
 - **Day 58:** 🔌 [[CCNA Course/Day 58 - Intro to Network Automation|Introduction to Network Automation]]
+- **Day 59:** 🔌 [[CCNA Course/Day 59 - Data Serialization (JSON, XML, YAML)|Data Serialization (JSON, XML, YAML)]]
 
 ---
 > [!TIP]
