@@ -6,7 +6,7 @@ tags:
   - learning-session
 type: course-topic
 ---
-
+-------------------------------------------------------------------------------------------------------------------------------------
 ← [[Course on Kali Linux|Go Back to Course Hub]]
 
 # 📝 Topic 23: Linux Terminal Editor: nano

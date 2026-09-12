@@ -133,6 +133,7 @@ flowchart TD
     Mod3 --> T43["Topic 43: Users/Groups"]:::linux
     Mod3 --> T45["Topic 45: Inside Shell"]:::linux
     Mod3 --> T48["Topic 48: System Admin"]:::linux
+    Mod3 --> T49["Topic 49: Process Deep-Dive"]:::linux
 
     %% Group 4: Essential Commands
     Mod4 --> T18["cd (Change Dir)"]:::command
@@ -215,6 +216,7 @@ Niche hamare course ke topics ki index list hai. Kisi bhi topic par click karke 
 - **Topic 46:** 🌐 [[Kali Linux Course/Topic 46 - Linux Networking and Troubleshooting (ip, ss, dig, route, resolv-conf, hosts)|Linux Networking & Troubleshooting (ip, ss, dig, route, /etc/hosts)]]
 - **Topic 47:** 📝 [[Kali Linux Course/Topic 47 - Linux Terminal Editor vi (Modal Editing, Insert vs Command Mode, Navigation, Save-Quit)|Linux Terminal Editor: vi (Modal Editing, Command/Insert Modes, Save & Quit)]]
 - **Topic 48:** ⚙️ [[Kali Linux Course/Topic 48 - Linux System Administration and Process Management (ps, top, systemctl, df, free, kill)|Linux System Administration & Process Management (ps, top, systemctl, df, free, kill)]]
+- **Topic 49:** ⚡ [[Kali Linux Course/Topic 49 - Linux Process Deep-Dive (pstree, pgrep, pkill, SIGKILL-SIGTERM, fg, bg, nohup)|Linux Process Deep-Dive: Lifecycle, Signals & Job Control (pstree, pgrep, pkill, SIGKILL vs SIGTERM, fg, bg, nohup)]]
 
 ---
 
