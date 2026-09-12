@@ -134,6 +134,7 @@ flowchart TD
     Mod3 --> T45["Topic 45: Inside Shell"]:::linux
     Mod3 --> T48["Topic 48: System Admin"]:::linux
     Mod3 --> T49["Topic 49: Process Deep-Dive"]:::linux
+    Mod3 --> T50["Topic 50: Task Automation"]:::linux
 
     %% Group 4: Essential Commands
     Mod4 --> T18["cd (Change Dir)"]:::command
@@ -217,6 +218,7 @@ Niche hamare course ke topics ki index list hai. Kisi bhi topic par click karke 
 - **Topic 47:** 📝 [[Kali Linux Course/Topic 47 - Linux Terminal Editor vi (Modal Editing, Insert vs Command Mode, Navigation, Save-Quit)|Linux Terminal Editor: vi (Modal Editing, Command/Insert Modes, Save & Quit)]]
 - **Topic 48:** ⚙️ [[Kali Linux Course/Topic 48 - Linux System Administration and Process Management (ps, top, systemctl, df, free, kill)|Linux System Administration & Process Management (ps, top, systemctl, df, free, kill)]]
 - **Topic 49:** ⚡ [[Kali Linux Course/Topic 49 - Linux Process Deep-Dive (pstree, pgrep, pkill, SIGKILL-SIGTERM, fg, bg, nohup)|Linux Process Deep-Dive: Lifecycle, Signals & Job Control (pstree, pgrep, pkill, SIGKILL vs SIGTERM, fg, bg, nohup)]]
+- **Topic 50:** 🤖 [[Kali Linux Course/Topic 50 - Linux System Maintenance and Task Automation (cron, crontab, at, logrotate)|Linux System Maintenance & Task Automation (cron, crontab, at, logrotate)]]
 
 ---
 
